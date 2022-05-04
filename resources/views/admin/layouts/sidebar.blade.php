@@ -26,7 +26,18 @@
 
       <ul class="sidebar-menu" data-widget="tree">
 
-        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('order.index')}}"><i class="fa fa-circle-o"></i>Danh sách đơn hàng</a></li>
+            
+          </ul>
+        </li>
 
         <li class="treeview">
           <a href="#">
@@ -43,7 +54,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
+            <i class="fa fa-th fa-cart-plus"></i> <span>Quản lý sản phẩm</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -56,7 +67,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Thuộc tính sản phẩm</span>
+            <i class="fa fa-th  fa-tags"></i> <span>Thuộc tính sản phẩm</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -67,14 +78,35 @@
             <li><a href="{{ route('attr-product.edit', 1)}}"><i class="fa fa-circle-o"></i>Thêm mới size</a></li>
           </ul>
         </li>
+
+        <li class="">
+          <a href="{{route('banner.index')}}">
+            <i class="fa fa-th fa-photo"></i> <span>Quản lý Banner</span>
+           
+          </a>
+          
+        </li>
         
         <li>
           <a href="">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+            <i class="fa fa-th "></i> <span>Widgets</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">Hot</small>
             </span>
           </a>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th fa-gear"></i> <span>Cài đặt</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('logout.admin') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+            
+          </ul>
         </li>
         
       </ul>

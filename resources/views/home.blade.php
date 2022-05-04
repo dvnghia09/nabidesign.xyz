@@ -17,17 +17,17 @@
                   <div class="slide-move">
                          <div class="slide-move__item active">
                              <a href="" class="slide-move__item-link">
-                                   <img class="slide-move__item-img" src="{{ url('frontend') }}/img/slide5.jpg"alt="">
+                                   <img class="slide-move__item-img" src="{{url('images')}}/{{$banner->banner1}}"alt="">
                              </a>
                          </div>
                          <div class="slide-move__item">
                             <a href="" class="slide-move__item-link">
-                                  <img class="slide-move__item-img" src="{{ url('frontend') }}/img/slide2.jpg"alt="">
+                                  <img class="slide-move__item-img" src="{{url('images')}}/{{$banner->banner2}}"alt="">
                             </a>
                         </div>
                         <div class="slide-move__item">
                             <a href="" class="slide-move__item-link">
-                                  <img class="slide-move__item-img" src="{{ url('frontend') }}/img/slide4.jpg"alt="">
+                                  <img class="slide-move__item-img" src="{{url('images')}}/{{$banner->banner3}}"alt="">
                             </a>
                         </div>
                        
@@ -298,7 +298,7 @@
                             <!-- img top bán CHẠY -->
                             <div class="col l-6 m-12 c-12">                               
                                 <a class="hot-item" href="">
-                                    <img class="hot-item-img" src="{{ url('frontend') }}/img/product-1.jpg" alt="">
+                                    <img class="hot-item-img" src="{{url('images')}}/{{$banner->banner4}}" alt="">
                                </a>                               
                             </div>
 

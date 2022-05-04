@@ -18,6 +18,14 @@ class CartController extends Controller
     }
 
     public function add(Request $req){
+        
+        $req->validate([
+            'color'=> ['required'],
+            'size'=> ['required'],
+        ],[
+            'size.required'=> 'Vui lòng chọn size',
+            'color.required' => 'Vui lòng chọn màu'
+        ]);
         $product = Product::find($req->id);
         
         $cart = new Cart();

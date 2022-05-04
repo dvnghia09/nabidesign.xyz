@@ -35,7 +35,7 @@ Class Cart {
         // Lưu vào session
         session(['cart'=>$this->items]);
 
-        // Session::forget('cart');
+        
 
 
         

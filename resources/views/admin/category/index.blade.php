@@ -62,7 +62,7 @@
                   <th>
                     @foreach($value->categorySub as $ads)
                      
-                     <h4>{{$ads->name}}</h4>
+                     <h4>{{$ads->size}}</h4>
                     @endforeach
 
                   </th>

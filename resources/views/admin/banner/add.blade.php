@@ -78,7 +78,7 @@
                 <div class="form-group">
                   <label for="">Danh mục sản phẩm</label>
                   <select class="form-control" name="category_id">
-                    @foreach($categorysub as $value)
+                    @foreach($category as $value)
                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                     @endforeach
                   </select>

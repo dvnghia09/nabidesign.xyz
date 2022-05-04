@@ -7,8 +7,11 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategorySubController;
 use App\Http\Controllers\Admin\AttrController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CheckOutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,6 +61,11 @@ Route::middleware('checkAdmin')->prefix('admin')->group(function(){
 
     // ---------------Phần thuộc tính sản phẩm-----------
     Route::resource('attr-product', AttrController::class);
+    // ---------------Banner-----------------------------
+    Route::resource('banner', BannerController::class);
+
+    // ---------------Danh sách đơn hàng-------------------
+    Route::resource('order', OrderController::class);
 
 
 });
@@ -66,17 +74,19 @@ Route::middleware('checkAdmin')->prefix('admin')->group(function(){
 Route::prefix('/')->group(function(){
 
     Route::get('/', [HomeController::class,'home'])->name('home');
+    // Trang chi tiết sản phẩm
     Route::get('/product-detail/{id}', [HomeController::class,'product'])->name('product.detail');
+    // Lấy sản phẩm theo danh mục
+    Route::get('/product-category/{id}', [HomeController::class,'productCate'])->name('product.category');
+    // Sản phẩm theo tìm kiếm
+    Route::post('/product-search', [HomeController::class,'search'])->name('product.search');
 
     // Trang quản lý của người dùng
     Route::middleware('checkUser')->prefix('/')->group(function () {
         
         Route::get('/user',[AccountController::class,'user'])->name('user');
         Route::get('logout-user', [AccountController::class,'logout'])->name('logout.user');
-
-
-        
-        
+  
     });
     // Giỏ hàng
     Route::get('show-cart',[CartController::class,'showCart'] )->name('showCart.user');
@@ -86,6 +96,12 @@ Route::prefix('/')->group(function(){
     Route::post('update-cart', [CartController::class,'update'])->name('update.cart');
     // Xóa sản phẩm trong giỏ hàng 
     Route::get('delete-cart/{id}',[CartController::class,'delete'] )->name('delete.cart');
+
+    // -------------------Đặt hàng(checkout)--------------------------
+    Route::get('checkout', [CheckOutController::class,'index'])->name('checkout.index');
+    Route::post('checkout', [CheckOutController::class,'AddOder'])->name('checkout.addOder');
+    // Trang cảm ơn
+    Route::get('thanks', [CheckOutController::class,'thanks'])->name('checkout.thanks');
 
 
 

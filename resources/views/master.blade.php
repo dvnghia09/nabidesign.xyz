@@ -98,9 +98,9 @@
                         <li class="header-menu__item">
                            <a href="#" class="header-menu__item-link">{{ $value->name }}</a>
                            <ul class="header-menu__child">
-                                @foreach($value->categorySub as $ads)
+                                @foreach($value->categorySub as $cate)
                                     <li class="header-menu__child-item">
-                                        <a href="" class="header-menu__child-item-link">{{$ads->name}}</a>
+                                        <a href="{{ route('product.category',$cate->id) }}" class="header-menu__child-item-link">{{$cate->name}}</a>
                                     </li>
                                 @endforeach
                                 
@@ -139,12 +139,16 @@
                </div>
                <div class="header-right ">
                     <div class="header-search hide-on-mobile-table">
-                        <div class="header-search__form" action="">
-                        <input class="header-search__form-input" type="text" placeholder="Tìm kiếm...">
-                        <span class="header-search__form-btn">
-                            <i class="ti-search"></i>
-                        </span>
-                        </div>
+                        <form action="{{ route('product.search') }}" method="POST">
+                            @csrf
+                            <div class="header-search__form" >
+                            <input class="header-search__form-input" type="text" name="key" placeholder="Tìm kiếm...">
+                            <button type="submit" class="header-search__form-btn">
+                                <i class="ti-search"></i>
+                            </button>
+                            </div>
+
+                        </form>
                     </div>
                     <div class="header-function">
                         

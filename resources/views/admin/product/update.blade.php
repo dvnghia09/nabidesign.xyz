@@ -77,7 +77,7 @@
                 <div class="form-group">
                   <label for="">Danh mục sản phẩm</label>
                   <select class="form-control" name="category_id">
-                    @foreach($category as $value)
+                    @foreach($categorysub as $value)
                     <option  value="{{ $value->id }}" selected="{{ $product->category_id == $value->id ? 'selected' : '' }}" >{{ $value->name }}</option>
                     @endforeach
                   </select>

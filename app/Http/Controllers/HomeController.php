@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\CategorySub;
 use App\Models\ImageProduct;
 use App\Models\ProductAttr;
 use App\Models\AttrProduct;
 use App\Helper\Cart;
+use App\Models\Banner;
 
 class HomeController extends Controller
 {
     public function home(){
+        $banner = Banner::find(1);
         $category = Category::all()->sortByDesc("id");
         $product = Product::all();
 
         $cart = new Cart();
         $totalQuantity = $cart->getTotalQuantity();
-        return view('home', compact('product','category','totalQuantity'));
+        return view('home', compact('product','category','totalQuantity','banner'));
     }
 
 
@@ -53,6 +56,21 @@ class HomeController extends Controller
             
 
         return view('product-detail',compact('category','product','images','color','size'));
+    }
+
+    // Sản phẩm theo danh mục
+    public function productCate($id){
+        $nameCate = CategorySub::find($id);
+        $product = Product::where('category_id',$id)->get();
+        return view('product-cate',compact('product','nameCate'));
+    }
+
+    // Sản phẩm tìm kiếm
+    public function search(Request $request){
+        $key = $request->key;
+        $product = Product::where('name', 'LIKE', "%{$key}%")->get();
+
+        return view('product-search',compact('product','key'));
     }
 
     

@@ -24,8 +24,8 @@ class ProductController extends Controller
     public function add(){
         $attrColor = AttrProduct::where('name','color')->get();
         $attrSize = AttrProduct::where('name','size')->get();
-        $category = CategorySub::all();
-        return view('admin.product.add',compact('category','attrColor','attrSize'));
+        $categorysub = CategorySub::all();
+        return view('admin.product.add',compact('categorysub','attrColor','attrSize'));
     }
 
     public function create(AddProductRequest $req){ 
@@ -82,8 +82,8 @@ class ProductController extends Controller
         $attrSize = AttrProduct::where('name','size')->get();
         $product = Product::find($id);
         $imageProduct = ImageProduct::where('product_id',$id)->pluck('images')->toArray();
-        $category = CategorySub::all();
-        return view('admin.product.update', compact('category','product','imageProduct','attrColor','attrSize','attr'));
+        $categorysub = CategorySub::all();
+        return view('admin.product.update', compact('categorysub','product','imageProduct','attrColor','attrSize','attr'));
     }
 
     public function update(UpdateProductRequest $request ,$id){

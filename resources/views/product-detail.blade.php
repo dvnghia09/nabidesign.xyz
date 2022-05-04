@@ -82,6 +82,9 @@
                     </label>
                   
                 @endforeach
+                @error('color')
+                        <span class="message-err" style="color:red;font-size: 14px;">{{ $message }}</span>
+                @enderror
               </div>
               <div class="form-group">
               <h2 class="title-method" >Kích thước: </h2>
@@ -93,6 +96,9 @@
                     </label>
                   
                 @endforeach
+                @error('size')
+                        <span class="message-err" style="color:red;font-size: 14px;">{{ $message }}</span>
+                @enderror
               </div>
             <input type="hidden" name="id" value="{{ $product->id }}">
             <label class="quantity-form" for="number">Số lượng:</label>

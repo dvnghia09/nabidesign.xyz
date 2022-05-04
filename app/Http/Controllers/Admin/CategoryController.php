@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function update(Request $req,$id){
         // validate
         $req->validate([
-            'name'=> 'required|unique:categories,name,'.$id,
+            'name'=> 'required|unique:categories,name,',
             'status'=> ['required'],
         ],[
             'name.required'=> 'Tên không được để rỗng!',

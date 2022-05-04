@@ -76,7 +76,7 @@
                   <div class="total-value final-value" id="basket-total">{{ number_format($totalPrice,0,".",".")}} đ</div>
                 </div>
                 <div class="summary-checkout">
-                  <button class="checkout-cta">Đặt hàng</button>
+                  <a href="{{ route('checkout.index') }}" class="checkout-cta">Đặt hàng</a>
                 </div>
               </div>
             </aside>

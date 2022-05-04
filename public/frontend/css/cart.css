@@ -257,6 +257,11 @@ font-weight: 600;}
   width: 50%;
 }
 
+.checkout-cta{
+  background-color: #000;
+  color: #fff;
+}
+
 .summary-promo {
   -webkit-transition: all .3s ease;
   -moz-transition: all .3s ease;

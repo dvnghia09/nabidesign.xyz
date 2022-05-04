@@ -58,8 +58,8 @@
                         <th>{{ $value->name }}</th>
                         <th><img src="{{url('images')}}/{{ $value->image }}" style="width:60px" alt=""></th>
                         <th>{{ $value->quantity }}</th>
-                        <th>{{ $value->price }}</th>
-                        <th>{{ $value->sale_price }}</th>
+                        <th>{{ number_format($value->price,0,".",".") }}đ</th>
+                        <th>{{ number_format($value->sale_price,0,".",".") }}đ</th>
                         <th>{{ $value->Category->name }}</th>
                         <th>
                         @if($value->status == 1)

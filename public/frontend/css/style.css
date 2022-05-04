@@ -299,7 +299,7 @@
  .header-search__form-btn {
      cursor: pointer;
      position: absolute;
-     top: 3%;
+     top: 7%;
      right: 4px;
      font-size: 1.4rem;
      padding: 10px 10px;
@@ -1035,6 +1035,48 @@ font-size: 1.5rem;}
   
 }
 
+.is-invalid{
+	border: 1px solid red !important;
+}
+
+.message-err{
+    font-size: 1.2rem;
+}
+
+/* Trang cảm ơn  */
+
+.thank {
+    margin-top: 90px;
+    text-align: center;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.icon {
+    font-size: 8rem;
+    color: #000000;
+}
+
+.thank-title {
+    font-size: 2.6rem;
+}
+
+.continue-buy {
+    font-size: 1.8rem;
+    color: red;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.thank-sub {
+    font-size: 1.8rem;
+}
+
+.continue-buy:hover{
+    opacity: 0.7;
+}
 
 
 
