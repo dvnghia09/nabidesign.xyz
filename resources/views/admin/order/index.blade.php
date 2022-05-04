@@ -47,6 +47,7 @@
                         <th>Địa chỉ</th>
                         <th>Sản phẩm</th>
                         <th>Thanh toán</th>
+                        <th>Lời nhắn</th>
                         <th>Thời gian</th>
                         <th>Trạng thái</th>
                         <th>Hành Động</th>
@@ -70,6 +71,7 @@
                     @endforeach  
                   </td>
                   <td>{{ number_format($value->total_price,0,".",".") }}đ</td>
+                  <td>{{ $value->note }}</td>
                   <td>{{ $value->created_at }}</td>
                   <td>
                   @if($value->status == 1)

@@ -38,41 +38,13 @@
                             </h4>
                         </div>
                         <ul class="nav-mobile-list">
-                            <li class="nav-mobile-item">
-                                <a href="" class="nav-mobile-item__link">SIÊU SALE THÁNG 9</a>
-                            </li>
-                            <li class="nav-mobile-item ">
-                                <a href="#" class="nav-mobile-item__link">
-                                    BỘ SƯU TẬP
-                                    <i class="ti-arrow-circle-down sb-caret"></i>
-                                </a>
-
-                                <ul class="nav-mobile__child">
-                                    <li class="nav-mobile__child-item">
-                                        <a href="" class="nav-mobile__child-item-link">Đầm</a>
-                                    </li>
-                                    <li class="nav-mobile__child-item">
-                                        <a href="" class="nav-mobile__child-item-link">Áo</a>
-                                    </li>
-                                    <li class="nav-mobile__child-item">
-                                        <a href="" class="nav-mobile__child-item-link">Chân váy</a>
-                                    </li>
-                                    <li class="nav-mobile__child-item">
-                                        <a href="" class="nav-mobile__child-item-link">Quần</a>
-                                    </li>
-                                   </ul>
-
-                            </li>
-                            <li class="nav-mobile-item">
-                                <a href="" class="nav-mobile-item__link">PHỤ KIỆN</a>
-                            </li>
-                            <li class="nav-mobile-item">
-                                <a href="" class="nav-mobile-item__link">ALBUM</a>
-                            </li>
-                            <li class="nav-mobile-item">
-                                <a href="" class="nav-mobile-item__link">TIN TỨC</a>
-                            </li>
-                            
+                        @foreach($cateSub as $cate)
+                        <li class="nav-mobile-item ">
+                                <a href="{{ route('product.category',$cate->id) }}" class="nav-mobile-item__link">
+                                {{  $cate->name }}    
+                                </a>  
+                            </li>    
+                        @endforeach  
                         </ul>
                         <div class="nav-close">
                             <i class="ti-close nav-close-icon"></i>
@@ -96,7 +68,7 @@
                        
                         @foreach($category as $value)  
                         <li class="header-menu__item">
-                           <a href="#" class="header-menu__item-link">{{ $value->name }}</a>
+                           <a href="{{ $value->link }}" class="header-menu__item-link">{{ $value->name }}</a>
                            <ul class="header-menu__child">
                                 @foreach($value->categorySub as $cate)
                                     <li class="header-menu__child-item">
@@ -108,32 +80,7 @@
                         </li>
 
                         @endforeach
-                       <!-- <li class="header-menu__item">
-                           <a href="" class="header-menu__item-link">BỘ SƯU TẬP</a>
-                           <ul class="header-menu__child">
-                            <li class="header-menu__child-item">
-                                <a href="" class="header-menu__child-item-link">Đầm</a>
-                            </li>
-                            <li class="header-menu__child-item">
-                                <a href="" class="header-menu__child-item-link">Áo</a>
-                            </li>
-                            <li class="header-menu__child-item">
-                                <a href="" class="header-menu__child-item-link">Chân váy</a>
-                            </li>
-                            <li class="header-menu__child-item">
-                                <a href="" class="header-menu__child-item-link">Quần</a>
-                            </li>
-                           </ul>
-                        </li>
-                       <li class="header-menu__item">
-                           <a href="" class="header-menu__item-link">Phụ kiện</a>
-                        </li>
-                       <li class="header-menu__item">
-                           <a href="" class="header-menu__item-link">Album</a>
-                        </li>
-                       <li class="header-menu__item"> 
-                           <a href="" class="header-menu__item-link">Tin tức</a>
-                        </li>-->
+
                    </ul>
 
                </div>
@@ -292,12 +239,16 @@
         
           </footer>
 
-          <div class="box-search">
-            <input class="header-search__form-input" type="text" placeholder="Tìm kiếm...">
-            <span class="header-search__form-btn">
-                <i class="ti-search"></i>
-            </span>
-        </div>
+            <form action="{{ route('product.search') }}" method="POST">
+                @csrf
+                <div class="box-search">
+                    <input class="header-search__form-input" name="key" type="text" placeholder="Tìm kiếm...">
+                    <button type="submit" class="header-search__form-btn">
+                        <i class="ti-search"></i>
+                    </button>
+                </div>
+            </form>
+
 
 
         

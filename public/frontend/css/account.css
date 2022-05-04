@@ -285,3 +285,42 @@ html{
     border: 1px solid red;
 }
 
+/* Mobile & Table */
+@media (max-width: 1023px) {
+  
+}
+
+/* Table */
+@media (min-width: 740px) and (max-width: 1023px) {
+  
+
+  
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+  
+    .modal-active {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .modal {
+        margin-top: 80px;
+        height: auto;
+        background-color: rgb(255 255 255 / 40%);
+        background-image:none;
+    }
+
+    .modal__form {
+        margin-bottom: 30px !important;
+        margin-top: 20px;
+    }
+
+    .modal__form-container {
+        background-color: #fff;
+    }
+
+}
+

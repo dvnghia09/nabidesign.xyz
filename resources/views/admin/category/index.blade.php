@@ -44,7 +44,8 @@
                         <th>STT</th>
                         <th>Tên</th>
                         <th>Trạng thái</th>
-                        <th>Số lượng Menu con</th>
+                        <th>Menu con</th>
+                        <th>Link</th>
                         <th>Tùy chọn</th>
                     </tr>
                 <tr>
@@ -62,10 +63,12 @@
                   <th>
                     @foreach($value->categorySub as $ads)
                      
-                     <h4>{{$ads->size}}</h4>
+                     <h4>-{{$ads->name}}</h4>
                     @endforeach
 
                   </th>
+                  <th>{{ $value->link }}</th>
+
                   <td>
                   <a href="{{ route('edit-category', $value->id)}}" class="btn btn-success">Sửa</a>
                   <a href="{{ route('delete-category', $value->id)}}" class="btn btn-danger" onclick="return confirm('Xóa danh mục {{ $value->name }} nghĩa là bạn đang xóa tất cả danh mục con và tất cả sản phẩm thuộc những danh mục con đó, bạn có muốn thực hiện không?')">Xóa</a>

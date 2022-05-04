@@ -19,7 +19,7 @@
               
               <!-- Phần ảnh mô tả -->
               @foreach($images as $image)
-                <img style="width: 100%" src = "{{ url('images') }}/{{$image}}" >
+                <img class="" style="width: 100%" src = "{{ url('images') }}/{{$image}}" >
               @endforeach
             </div>
           </div>
@@ -50,15 +50,6 @@
         <!-- card right -->
         <div class = "product-content">
           <h2 class = "product-title">{{ $product->name }}</h2>
-          <a href = "{{ route('home') }}" class = "product-link">Quay lại cửa hàng</a>
-          <div class = "product-rating">
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star-half-alt"></i>
-            <span>4.7(21)</span>
-          </div>
 
           <div class = "product-price">
             <p class = "last-price">Giá cũ: <span>{{ number_format($product->price,0,".",".") }} đ</span></p>
@@ -83,7 +74,7 @@
                   
                 @endforeach
                 @error('color')
-                        <span class="message-err" style="color:red;font-size: 14px;">{{ $message }}</span>
+                        <span class="message-err" style="color:red;font-size: 14px;display: block;">{{ $message }}</span>
                 @enderror
               </div>
               <div class="form-group">
@@ -97,7 +88,7 @@
                   
                 @endforeach
                 @error('size')
-                        <span class="message-err" style="color:red;font-size: 14px;">{{ $message }}</span>
+                        <span class="message-err" style="color:red;font-size: 14px;display: block;">{{ $message }}</span>
                 @enderror
               </div>
             <input type="hidden" name="id" value="{{ $product->id }}">
@@ -108,27 +99,9 @@
             <button type = "submit" class = "btn">
               Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
             </button>
-            <button type = "button" class = "btn">Mua ngay</button>
           </form>
 
-          <div class = "social-links">
-            <p>Chia sẻ tới: </p>
-            <a href = "#">
-              <i class = "fab fa-facebook-f"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-twitter"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-instagram"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-whatsapp"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-pinterest"></i>
-            </a>
-          </div>
+          
         </div>
       </div>
     </div>

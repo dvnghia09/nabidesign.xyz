@@ -27,8 +27,16 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Tên Menu</label>
-                  <input type="text" name="name" value="{{ $category->name }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1" placeholder="Nhập tên menu cha bạn muốn thêm">
+                  <input type="text" name="name" value="{{ $cate->name }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1" placeholder="Nhập tên menu cha bạn muốn thêm">
                     @error('name')
+                        <span class="message-err" style="color:red;">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail2">Link</label>
+                  <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="#" id="exampleInputEmail2" placeholder="Nhập link nếu có">
+                    @error('link')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
@@ -37,11 +45,11 @@
                   <label for="exampleInputEmail1">Chọn trạng thái</label>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="status" id="input" value="1" {{ $category->status == 1 ? 'checked' : '' }}>
+                      <input type="radio" name="status" id="input" value="1" {{ $cate->status == 1 ? 'checked' : '' }}>
                       Hiện
                     </label>
                     <label>
-                      <input type="radio" name="status" id="input" value="0" {{ $category->status == 0 ? 'checked' : '' }} >
+                      <input type="radio" name="status" id="input" value="0" {{ $cate->status == 0 ? 'checked' : '' }} >
                       Ẩn
                     </label>
                   </div>

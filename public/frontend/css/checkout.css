@@ -125,30 +125,6 @@ aside {
   margin-bottom: 16px;
 }
 
-.basket-product {
-  
-  
-  
-}
-
-.item {
-  
-}
-
-.item-heading {
-  
-  
-  
-  
-}
-
-.product-image {
-  
-}
-
-.product-details {
- 
-}
 
 .product-details {
   
@@ -230,4 +206,34 @@ min-width: 100px;font-size: 1.4rem;text-align: center;}
     width: 60%;
   }
   
+}
+
+
+/* Mobile & Table */
+@media (max-width: 1023px) {
+  
+}
+
+/* Table */
+@media (min-width: 740px) and (max-width: 1023px) {
+  
+
+  
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+  
+  .hide-on-mobile{
+    display: none;
+  }
+
+  .product-details-name{
+    margin: 0;
+  }
+
+  .product-details-tt{
+    margin-top: 3px;
+  }
+
 }

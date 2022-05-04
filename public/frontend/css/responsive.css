@@ -43,6 +43,18 @@
         display: block !important;
     }
 
+    .img-select{
+        width: 20%;
+    }
+
+    .img-display {
+        width: 80%;
+    }
+
+    .product-imgs {
+        display: flex;
+    }
+
 
 }
 
@@ -54,6 +66,10 @@
 
     .box-search{
         width: 400px;
+    }
+
+    .img-select {
+        max-height: 920px;
     }
 
     
@@ -83,6 +99,19 @@
 
     .footer{
         padding: 0 8px;
+    }
+
+    .img-select{
+        max-height: 450px;
+    }
+
+    .product-title {
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+
+    .product-content {
+        padding: 1rem 1rem;
     }
 
 }

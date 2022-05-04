@@ -33,13 +33,14 @@
                     <img width="20px" src="{{url('images')}}/{{$value['image']}}" alt="Placholder Image 2" class="product-frame">
                   </div>
                   <div class="product-details">
-                    <h1><strong>{{ $value['product_name'] }}</strong></h1>
+                    <h1><strong class="name-pro">{{ $value['product_name'] }}</strong></h1>
                     <p><strong>Màu: {{ $value['color'] }}, Size: {{ $value['size'] }}</strong></p>
                     <p>Mã sản phẩm - {{ $value['product_id'] }}</p>
                   </div>
                 </div>
-                <div class="price">{{ number_format($value['price'],0,".",".") }} đ</div>
+                <div class="price"><span class="on-mobile">Giá:</span>{{ number_format($value['price'],0,".",".") }} đ</div>
                 <div class="quantity">
+                  <span class="on-mobile">Số lượng:</span>
                     <form class="form-update" action="{{ route('update.cart') }}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $key }}" >
@@ -47,7 +48,7 @@
                         <button class="btn-update" type="submit">Cập nhật</button>
                     </form>
                 </div>
-                <div class="subtotal">{{ number_format($value['price'] * $value['quantity'],0,".",".") }} đ</div>
+                <div class="subtotal"><span class="on-mobile">Tổng giá:</span>{{ number_format($value['price'] * $value['quantity'],0,".",".") }} đ</div>
                 <div >
                     <a class="remove" href="{{route('delete.cart',$key)}}">Xóa</a>
                 </div>

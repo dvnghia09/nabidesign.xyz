@@ -34,7 +34,15 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn trạng thái</label>
+                  <label for="exampleInputEmail2">Link</label>
+                  <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="#" id="exampleInputEmail2" placeholder="Nhập link nếu có">
+                    @error('link')
+                        <span class="message-err" style="color:red;">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                  <label for="">Chọn trạng thái</label>
                   <div class="radio">
                     <label>
                       <input type="radio" name="status" id="input" value="1" checked="checked">

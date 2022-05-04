@@ -17,8 +17,8 @@
               <div class="basket-labels">
                 <ul class="list-item-pro" >
                   <li class="item item-heading">Sản phẩm</li>
-                  <li class="price">Giá</li>
-                  <li class="quantity">Số lượng</li>
+                  <li class="price hide-on-mobile">Giá</li>
+                  <li class="quantity hide-on-mobile">Số lượng</li>
                   <li class="subtotal">Tổng giá</li>
                 </ul>
               </div>
@@ -31,11 +31,11 @@
                   </div>
                   <div class="product-details">
                     <h1 class="product-details-name" >{{ $value['product_name'] }}</h1>
-                    <p class="product-details-tt" ><strong>Màu: {{ $value['color'] }}, Size: {{ $value['size'] }}</strong></p>
+                    <p class="product-details-tt" ><strong>Màu: {{ $value['color'] }}, Size: {{ $value['size'] }} </br>Số lượng:{{ $value['quantity'] }}</strong></p>
                   </div>
                 </div>
-                <div class="price">{{ number_format($value['price'],0,".",".") }} đ</div>
-                <div class="quantity">{{ $value['quantity'] }}</div>
+                <div class="price hide-on-mobile">{{ number_format($value['price'],0,".",".") }} đ</div>
+                <div class="quantity hide-on-mobile">{{ $value['quantity'] }}</div>
                 <div class="subtotal">{{ number_format($value['price'] * $value['quantity'],0,".",".") }} đ</div>
               </div> 
               @endforeach
