@@ -31,6 +31,7 @@ class AddProductRequest extends FormRequest
             'sale_price' => 'nullable|lt:price|numeric',
             'file' => 'required|mimes:jpg,jpeg,png',
             'files' => 'required',
+            'attr' => 'accepted',
             
         ];
     }
@@ -49,6 +50,7 @@ class AddProductRequest extends FormRequest
             'price.numeric' => 'Giá phải là số',
             
             'files.required' => 'Vui lòng chọn ảnh mô tả sảm phẩm sản phẩm',
+            'attr.accepted' => 'Vui lòng chọn thuộc tính sản phẩm',
 
         ];
     }

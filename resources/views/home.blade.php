@@ -71,12 +71,12 @@
                             @endforeach
                           </div>
                           <div class="see-all">
-                              <a href="" class="see-all-link">Xem tất cả mẫu mới</a>
+                              <a href="{{ route('see.all') }}" class="see-all-link">Xem tất cả mẫu mới</a>
                           </div>
                     </div>
                     <div class="product-new">
                         <div class="product-heading">
-                           <h2 class="product-heading__title">Siêu sale tháng</h2>
+                           <h2 class="product-heading__title">SIÊU SALE THÁNG</h2>
                            <h3 class="product-heading__subtitle">Sale off</h3>
                         </div>
                         <div class="row">
@@ -116,7 +116,7 @@
                             @endforeach
                         </div>
                         <div class="see-all">
-                            <a href="" class="see-all-link">Xem tất cả</a>
+                            <a href="{{ route('see.all.sale') }}" class="see-all-link">Xem tất cả</a>
                         </div>
                     </div>
                     <div class="product-new">
@@ -175,7 +175,7 @@
                             </div>
                             
                             <div class="see-all">
-                                <a href="" class="see-all-link">Xem tất cả</a>
+                                <a href="{{ route('see.all.buy') }}" class="see-all-link">Xem tất cả</a>
                             </div>
                         </div>
                     </div>

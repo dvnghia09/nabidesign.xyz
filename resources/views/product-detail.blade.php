@@ -7,6 +7,12 @@
     -webkit-box-shadow: 0 0 3px rgb(0 0 0 / 8%) inset;
     box-shadow: 6px 5px 8px 3px rgb(0 0 0 / 8%);
   }
+
+  .product-heading__same{
+    border-top: 1px solid #ccc;
+    margin:0;
+    padding-top: 20px;
+  }
 </style>
 
 <div class = "card-wrapper">
@@ -30,21 +36,14 @@
               </a>
             </div>
 
-           
             @foreach($images as $key => $image)
               <div class = "img-item">
                 <a href = "#" data-id = "{{ $key + 2 }}">
                     <img style="width: 100%" src = "{{ url('images') }}/{{$image}}" alt = "shoe image">
                 </a>
-              </div>
-                
+              </div>            
             @endforeach
 
-            
-
-            
-            
-            
           </div>
         </div>
         <!-- card right -->
@@ -100,12 +99,58 @@
               Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
             </button>
           </form>
-
-          
         </div>
       </div>
     </div>
   </div>
+
+  <div class="products">
+                <div class="grid wide">
+                <div class="product-new">
+                          <div class="product-heading">
+                             <h1 class="product-heading__same">Sản phẩm tương tự</h1>
+                          </div>
+                          <div class="row">
+                            
+                            @foreach($productSame as $value)
+                                <div class="col l-3 m-6 c-6 ">
+                                    <div class="product">
+                                        <a href="{{ route('product.detail',$value->id) }}" class="product-item">
+                                            <div class="product-item__img" style="background-image:url({{ url('images') }}/{{$value->image}})"></div>
+                                            <h4 class="product-item__name">{{$value->name}}</h4>
+                                            <div class="product-item__price">
+                                                @if($value->sale_price > 0)
+                                                <span class="product-item__price-old">{{ number_format($value->price,0,".",".") }}đ</span>
+                                                <span class="product-item__price-present">{{ number_format($value->sale_price,0,".",".") }}đ</span>
+                                                @else
+                                                <span class="product-item__price-present">{{ number_format($value->price,0,".",".") }}đ</span>
+                                                @endif
+                                            </div>
+                                            @if($value->sale_price > 0)
+                                            <span class="product-item__sale">Giảm {{ceil(100-(($value->sale_price/$value->price)*100))}}%</span>
+                                            @else
+                                            <span class="product-item__sale">Giảm 0%</span>
+                                            @endif
+                                        </a>
+                                        <div class="product-item__btn">
+                                            <a href="{{ route('product.detail',$value->id) }}" class="product-item__btn-buy">
+                                                <i class="ti-shopping-cart"></i>
+                                                Đặt hàng
+                                            </a>
+                                            <span class="product-item__btn-brick"></span>
+                                            <a href="{{ route('product.detail',$value->id) }}" class="product-item__btn-buy">
+                                                <i class="ti-eye"></i>
+                                                Xem chi tiết
+                                            </a>
+                                        </div>
+                                    </div>                               
+                                </div>
+                            @endforeach
+                          </div>
+                          
+                    </div>
+                    
+             </div>
     
 
         

@@ -80,6 +80,14 @@ Route::prefix('/')->group(function(){
     Route::get('/product-category/{id}', [HomeController::class,'productCate'])->name('product.category');
     // Sản phẩm theo tìm kiếm
     Route::post('/product-search', [HomeController::class,'search'])->name('product.search');
+    // Xem tất cả mẫu mới
+    Route::get('/see-all', [HomeController::class,'seeAll'])->name('see.all');
+    // Xem tất cả mẫu mới
+    Route::get('/see-all-sale', [HomeController::class,'seeAllSale'])->name('see.all.sale');
+    // Xem tất cả mẫu mới
+    Route::get('/see-all-buy', [HomeController::class,'seeAllBuy'])->name('see.all.buy');
+    
+
 
     // Trang quản lý của người dùng
     Route::middleware('checkUser')->prefix('/')->group(function () {

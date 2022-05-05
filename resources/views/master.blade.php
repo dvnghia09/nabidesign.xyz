@@ -18,6 +18,7 @@
     <title>Nabi</title>
 </head>
 <body>
+    
    <div id="app">
        <header class="header">
 
@@ -122,7 +123,7 @@
                 <div class="row">
                     <div class="col l-3 m-6 c-6 contact-item_padding">
                         <div class="contact-item">
-                            <a class="contact-item_link" href="">
+                            <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/freeship.png" alt="">
                                 <h2 class="contact-item_content">MIỄN PHÍ GIAO HÀNG</h2>
                             <p class="contact-item_content-sub">Với hóa đơn từ 300.000đ</p>
@@ -131,7 +132,7 @@
                     </div>
                     <div class="col l-3 m-6 c-6 contact-item_padding">
                         <div class="contact-item">
-                            <a class="contact-item_link" href="">
+                            <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/antoan.png" alt="">
                                 <h2 class="contact-item_content">03 NGÀY</h2>
                             <p class="contact-item_content-sub">Đổi trả sản phẩm trong vòng 03 ngày</p>
@@ -149,7 +150,7 @@
                     </div>
                     <div class="col l-3 m-6 c-6 contact-item_padding">
                         <div class="contact-item">
-                            <a class="contact-item_link" href="">
+                            <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/thuhang.png" alt="">
                                 <h2 class="contact-item_content">THỬ NGAY TẠI SHOWROOMS</h2>
                             <p class="contact-item_content-sub">04 showroom tại hà nội</p>
@@ -254,12 +255,19 @@
         
         
    </div>
-   <!-- nút quận lên đầu trang -->
-  <div class="btntop">
-    <span class="btntop-title">Về đầu trang</span>
-    <img class="btntop-img" src="https://img.icons8.com/ios-glyphs/30/000000/long-arrow-right.png"/>
-  </div>
-    
+    <!-- Nhắn tin đến message -->
+    <div class="btn-mess">
+        <a href="https://m.me/Nabidesign2020" class="link-mess">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+    </div>
+
+    <!-- nút quận lên đầu trang -->
+    <div class="btntop">
+        <span class="btntop-title">Về đầu trang</span>
+        <img class="btntop-img" src="https://img.icons8.com/ios-glyphs/30/000000/long-arrow-right.png"/>
+    </div>
+
   <script src="{{ url('frontend') }}/js/main.js"></script>
   @yield('javascrip')
     

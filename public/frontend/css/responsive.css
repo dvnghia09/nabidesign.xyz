@@ -53,6 +53,7 @@
 
     .product-imgs {
         display: flex;
+        align-items: center;
     }
 
 

@@ -17,10 +17,11 @@ class HomeController extends Controller
     public function home(){
         $banner = Banner::find(1);
         $category = Category::all()->sortByDesc("id");
-        $product = Product::all()->take(8);
-
+        // Mẫu mới
+        $product = Product::all()->sortByDesc("id")->take(8);
+        // Top sale
         $productSale = Product::orderBy('sale_price', 'ASC')->take(8)->get();
-
+        // Top bán chạy
         $productTopSale = Product::orderBy('quantity', 'ASC')->take(4)->get();
 
         $cart = new Cart();
@@ -32,9 +33,13 @@ class HomeController extends Controller
     // Trang product detail
     public function product($id){
         
+        
         $category = Category::all()->sortByDesc("id");
         $product = Product::find($id);
         $images = ImageProduct::where('product_id', $id)->pluck('images')->toArray();
+
+        $cate_id = $product->category_id;
+        $productSame = Product::where('category_id',$cate_id)->where('id','<>', $id)->get();
 
         $attr = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
         $attrColor = AttrProduct::where('name','color')->pluck('id')->toArray();
@@ -59,7 +64,7 @@ class HomeController extends Controller
             $size = AttrProduct::whereIn('id',$sizeArr)->pluck('value')->toArray();
             
 
-        return view('product-detail',compact('category','product','images','color','size'));
+        return view('product-detail',compact('category','product','images','color','size','productSame'));
     }
 
     // Sản phẩm theo danh mục
@@ -78,6 +83,28 @@ class HomeController extends Controller
 
         return view('product-search',compact('product','key'));
     }
+
+    // Trang xem tất cả mẫu mới
+    public function seeAll(){
+        $name = 'Mẫu mới';
+        $product = Product::all()->sortByDesc("id");
+        return view('see-all',compact('product','name'));
+    }
+    // Tất cả top sale
+    public function seeAllSale(){
+        $name = 'Top sale';
+        $product = Product::orderBy('sale_price', 'ASC')->get();
+        return view('see-all',compact('product','name'));
+    }
+
+    // Tất cả top bán chạy
+    public function seeAllBuy(){
+        $name = 'Top bán chạy';
+        $product = Product::orderBy('quantity', 'ASC')->get();
+        return view('see-all',compact('product','name'));
+    }
+
+
 
     
 

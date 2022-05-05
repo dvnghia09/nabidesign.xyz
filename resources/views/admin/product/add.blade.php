@@ -61,7 +61,8 @@
                   <label>
                   <input value="{{$value->id}}" name="attr[]" type="checkbox"> {{ $value->value }}
                   </label>
-                @endforeach
+                  @endforeach
+                  
                 </div>
 
                 <div class="checkbox">
@@ -69,8 +70,9 @@
                 @foreach($attrSize as $value)
                   <label>
                   <input value="{{$value->id}}" name="attr[]" type="checkbox"> {{ $value->value }}
-                  </label>  
-                @endforeach
+                  </label> 
+                  @endforeach
+                   
                 </div>
 
                 
