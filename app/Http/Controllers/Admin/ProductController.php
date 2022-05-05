@@ -59,13 +59,15 @@ class ProductController extends Controller
         }
 
         $attr = $req->attr;
-        foreach($attr as $value){
-         
-            ProductAttr::create([
-                'id_attr' => $value,
-                'id_product' => $product->id,
-            ]);
-        
+        if(!empty($attr)){
+            foreach($attr as $value){
+             
+                ProductAttr::create([
+                    'id_attr' => $value,
+                    'id_product' => $product->id,
+                ]);
+            
+            }
         }
 
         if($product){
