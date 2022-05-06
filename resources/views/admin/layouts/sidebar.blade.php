@@ -28,7 +28,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
+            <i class="fa  fa-archive"></i> <span>Quản lý đơn hàng</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -41,7 +41,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Quản lý Menu</span>
+            <i class="fa fa-server"></i> <span>Quản lý Menu</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -82,9 +82,13 @@
         <li class="">
           <a href="{{route('banner.index')}}">
             <i class="fa fa-th fa-photo"></i> <span>Quản lý Banner</span>
-           
           </a>
-          
+        </li>
+
+        <li class="">
+          <a href="{{route('look-book.index')}}">
+            <i class="fa fa-th  fa-camera"></i> <span>Album Look Book</span>
+          </a>
         </li>
 
         <li class="treeview">

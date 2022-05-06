@@ -285,9 +285,19 @@ html{
     border: 1px solid red;
 }
 
+.hiden{
+    display: none;
+}
+
 /* Mobile & Table */
 @media (max-width: 1023px) {
-  
+    .modal__form{
+        width: auto !important;
+    }
+
+    .hiden-mb-tb{
+        display: none;
+    }
 }
 
 /* Table */

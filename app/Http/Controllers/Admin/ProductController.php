@@ -89,10 +89,12 @@ class ProductController extends Controller
     }
 
     public function update(UpdateProductRequest $request ,$id){
-        // Xóa thuộc tính sản phẩm trước
-        ProductAttr::where('id_product', $id)->delete();
-        // inset các thuộc tính vào
+        
+        // insert các thuộc tính vào
         $attr = $request->attr;
+        if(!empty($attr)){
+            // Xóa thuộc tính sản phẩm trước
+            ProductAttr::where('id_product', $id)->delete();   
         foreach($attr as $value){
          
             ProductAttr::create([
@@ -100,6 +102,7 @@ class ProductController extends Controller
                 'id_product' => $id,
             ]);
         
+            }
         }
 
         $product = Product::find($id);

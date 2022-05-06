@@ -26,6 +26,7 @@
                   </div>
              </div>
 
+            <!-- product -->
              <div class="products">
                 <div class="grid wide">
                     <div class="product-new">
@@ -178,8 +179,23 @@
                                 <a href="{{ route('see.all.buy') }}" class="see-all-link">Xem tất cả</a>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>    
+             </div>
+             <!-- end product -->
+             <div class="look-book">
+                 <div class="grid wide">
+                     <h1 class="look-book-name">LOOK BOOK</h1>
+                     <div class="row">
+                         @foreach($lookBook as $value)
+                        <div class="col l-3 m-6 c-6 ">
+                            <a href="{{$value->link}}" class="look-book-item">
+                                <img src="{{url('images')}}/{{$value->image}}" alt="look-book" class="look-book-image">
+                                <h2 class="name-look-book">{{$value->name}}</h2>
+                            </a>
+                        </div> 
+                        @endforeach   
+                     </div>
+                 </div>
              </div>
                
 @stop

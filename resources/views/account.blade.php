@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 </form>
-                    <div class="modal__form-socials">
+                    <div class="modal__form-socials hiden-mb-tb hiden">
                     <a href="https://www.facebook.com/" class="btn btn--size-s btn--fb">
                         <i class="fab fa-facebook-square btn--fb-icon"></i>
                         <span class="modal__form-social-title">Kết nối với Facebook</span>
@@ -122,7 +122,7 @@
                 </div>
             </div>
             </form>
-                <div class="modal__form-socials">
+                <div class="modal__form-socials hiden-mb-tb hiden">
                 <a href="https://www.facebook.com/" class="btn btn--size-s btn--fb">
                     <i class="fab fa-facebook-square btn--fb-icon"></i>
                     <span class="modal__form-social-title">Kết nối với Facebook</span>

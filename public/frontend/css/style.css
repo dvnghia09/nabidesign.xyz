@@ -581,6 +581,7 @@
  
  .hot-item-img{
      width: 100%;
+     border-radius: 6px;
  }
  
  .hot-item{
@@ -836,7 +837,6 @@
 }
 .product-title {
     font-size: 4rem;
-    text-transform: capitalize;
     font-weight: 700;
     position: relative;
     color: #12263a;
@@ -847,9 +847,9 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0;
-    height: 4px;
-    width: 80px;
+    bottom: -3px;
+    height: 3px;
+    width: 120px;
     background: #12263a;
 }
 
@@ -900,7 +900,7 @@
     font-size: 1.8rem;
 }
 .product-detail p{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     padding: 0.3rem;
     opacity: 0.8;
     line-height: 2rem;
@@ -1091,6 +1091,42 @@ font-size: 1.5rem;}
     color: #256eff;
 }
 
+.look-book{
+
+}
+
+.look-book-name {
+    font-size: 2.8rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 30px;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    margin-bottom: 12px;
+}
+
+.look-book-item{
+    display: block;
+    text-decoration: none;
+}
+
+.name-look-book {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-weight: 600;
+}
+
+.look-book-image {
+    width: 100%;
+    border-radius: 4px;
+    vertical-align: middle;
+}
 
 
 

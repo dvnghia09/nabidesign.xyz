@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategorySubController;
 use App\Http\Controllers\Admin\AttrController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\LookBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\BannerController;
@@ -63,6 +64,8 @@ Route::middleware('checkAdmin')->prefix('admin')->group(function(){
     Route::resource('attr-product', AttrController::class);
     // ---------------Banner-----------------------------
     Route::resource('banner', BannerController::class);
+    // ---------------LookBook-----------------------------
+    Route::resource('look-book', LookBookController::class);
 
     // ---------------Danh sách đơn hàng-------------------
     Route::resource('order', OrderController::class);

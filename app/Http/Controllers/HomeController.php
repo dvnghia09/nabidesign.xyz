@@ -9,6 +9,7 @@ use App\Models\CategorySub;
 use App\Models\ImageProduct;
 use App\Models\ProductAttr;
 use App\Models\AttrProduct;
+use App\Models\LookBook;
 use App\Helper\Cart;
 use App\Models\Banner;
 
@@ -24,9 +25,12 @@ class HomeController extends Controller
         // Top bán chạy
         $productTopSale = Product::orderBy('quantity', 'ASC')->take(4)->get();
 
+        // Album look book
+        $lookBook = LookBook::all();
+
         $cart = new Cart();
         $totalQuantity = $cart->getTotalQuantity();
-        return view('home', compact('product','category','totalQuantity','banner','productSale','productTopSale'));
+        return view('home', compact('product','category','totalQuantity','banner','productSale','productTopSale','lookBook'));
     }
 
 
