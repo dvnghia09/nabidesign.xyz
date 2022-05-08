@@ -25,7 +25,7 @@ class AddOderRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:12',
             'address' => 'required',
         ];
     }
@@ -36,6 +36,7 @@ class AddOderRequest extends FormRequest
             'phone.required'=> 'Số điện thoại không được để rỗng!',
             'phone.regex'=> 'Số điện thoại không đúng!',
             'phone.min'=> 'Số điện thoại không đúng!',
+            'phone.max'=> 'Số điện thoại không đúng!',
             'address.required'=> 'Tên không được để rỗng!',
 
         ];

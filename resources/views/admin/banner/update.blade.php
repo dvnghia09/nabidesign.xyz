@@ -28,7 +28,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <label for="example1">Đường dẫn look book</label>
+                  <label for="example1">Đường dẫn banner</label>
                   <input type="text" value="{{ $banner->link }}" name="link" class="form-control @error('link') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
                     @error('link')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="file-upload">Ảnh Look Book</label>
+                  <label for="file-upload">Ảnh Banner</label>
                   <div class="imageFile" style="height:120px;width:100%;">
                     <label for="file-upload" class="custom-file-upload">
                       <img src="{{url('images')}}/{{$banner->image}}" id="image" style="height:100%;border-radius:5px;" style="" alt="">

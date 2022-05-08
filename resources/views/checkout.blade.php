@@ -59,28 +59,28 @@
             <h3 class="form-title" >Thông tin giao hàng</h3>
             <div class="group-form">
                 <label for="fname">Tên :</label>
-                <input type="text" id="fname" class="@error('name') is-invalid @enderror" name="name" placeholder="Nhập tên của bạn ...">
+                <input type="text" id="fname" value="{{old('name')}}" class="@error('name') is-invalid @enderror" name="name" placeholder="Nhập tên của bạn ...">
                     @error('name')
                         <p class="message-err" style="color:red;">{{ $message }}</p>
                     @enderror
             </div>
             <div class="group-form">
                 <label for="fname1">Số điện thoại :</label>
-                <input type="text" id="fname1" class="@error('phone') is-invalid @enderror" name="phone" placeholder="Nhập số điện thoại của bạn ...">
+                <input type="text" id="fname1" value="{{old('phone')}}" class="@error('phone') is-invalid @enderror" name="phone" placeholder="Nhập số điện thoại của bạn ...">
                     @error('phone')
                         <p class="message-err" style="color:red;">{{ $message }}</p>
                     @enderror
             </div>
             <div class="group-form">
                 <label for="fname2">Địa chỉ :</label>
-                <input type="text" id="fname2" class="@error('address') is-invalid @enderror" name="address" placeholder="Nhập địa chỉ của bạn ...">
+                <input type="text" id="fname2" value="{{old('address')}}" class="@error('address') is-invalid @enderror" name="address" placeholder="Nhập địa chỉ của bạn ...">
                     @error('address')
                         <p class="message-err" style="color:red;">{{ $message }}</p>
                     @enderror
             </div>
             <div class="group-form">
                 <label for="fname3">Ghi chú :</label>
-                <textarea name="note" id="fname3" cols="30" rows="10"></textarea>               
+                <textarea name="note" id="fname3" cols="30" rows="10">{{old('note')}}</textarea>               
             </div>   
 
             <div class="submit-form group-form">
