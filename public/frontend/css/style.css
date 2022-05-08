@@ -443,6 +443,10 @@
      text-align: center;
      margin-top: 70px;
  }
+
+ .product-heading-no-mg{
+     margin-top: 0;
+ }
  
  .product-heading__title{
      font-size: 3rem;
@@ -792,14 +796,8 @@
 }
 
 
-
-
-
-
-
-
 .card-wrapper{
-    margin-top: 90px !important;
+    margin-top: 10px !important;
     max-width: 1100px;
     margin: 0 auto;
 }
@@ -819,14 +817,21 @@
 .img-select {
     display: flex;
     flex-direction: column;
-    width: 25%;
-    max-height: 652px;
+    width: 20%;
+    max-height: 636px;
     overflow: hidden;
     overflow-y: auto;
+    padding: 8px;
+}
+
+img {
+    vertical-align: middle;
 }
 
 .img-item{
-    margin: 0.3rem;
+    margin: 0.4rem;
+    padding: 4px;
+    border: 1px solid #000;
 }
 
 .img-item:hover{
@@ -951,30 +956,13 @@ font-size: 1.5rem;}
 .purchase-info .btn:hover{
     opacity: 0.9;
 }
-.social-links{
-    display: flex;
-    align-items: center;
-    font-size: 1.8rem;
+
+.product-detail {
+    font-size: 1.2rem;
+    line-height: 2rem;
 }
-.social-links a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    color: #000;
-    border: 1px solid #000;
-    margin: 0 0.2rem;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 1.4rem;
-    transition: all 0.5s ease;
-}
-.social-links a:hover{
-    background: #000;
-    border-color: transparent;
-    color: #fff;
-}
+
+
 
 @media screen and (min-width: 992px){
     .card{
@@ -1126,6 +1114,118 @@ font-size: 1.5rem;}
     width: 100%;
     border-radius: 4px;
     vertical-align: middle;
+}
+
+
+/* slide */
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    padding: 0 4px;
+    width: 80%;
+  }
+ /* ẩn hình ảnh cho phần tử slideshow */
+  .mySlides {
+    display: none;
+  }
+ /* thiết kế nút mũi tên*/
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+ /* thiết kế nút mũi tên next nằm phía bên phải */
+  .next {
+    right: 14px;
+    border-radius: 3px 0 0 3px;
+  }
+ /* hiệu ứng thay đổi background khi hover vào nút mũi tên*/
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+ /* Thiết lập style cho nội dung của mỗi phần tử slideshow */
+ .text {
+    color: #f2f2f2;
+    font-size: 14px;
+    padding: 2px 6px;
+    position: absolute;
+    background: #000000b5;
+    bottom: 9px;
+    right: 50%;
+    transform: translateX(50%);
+    border-radius: 10px;
+}
+ /* Thiết lập style cho số hiển thị của phần tử */
+  
+ /* thiết lập style  nút tròn điều khiển*/
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+ .active, .dot:hover {
+    background-color: #717171;
+  }
+ /* tạo hiệu ứng chuyển động fade */
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+ @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+ @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+
+/* breadcrumb */
+
+.breadcrumb{
+    margin-top: 90px;
+}
+
+.breadcrumb-arrows {
+    display: flex;
+    list-style: none;
+    font-size: 1.2rem;
+    padding: 10px 0 20px;
+}
+
+.breadcrumb-item-link {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.breadcrumb-item {
+    
+}
+
+.icon-right{
+    padding: 0 8px;
+}
+
+.disable{
+    color: #8f8c8c;
 }
 
 

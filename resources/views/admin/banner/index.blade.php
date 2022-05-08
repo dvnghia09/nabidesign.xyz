@@ -22,44 +22,28 @@
       <!-- Default box -->
       <div class="col-md-12">
           <div class="box">
-            <div class="box-header">
-           <a href="{{ route('banner.edit', 1) }}" class="btn btn-success">Sửa banner</a>
-            </div>
+            
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                   <thead>
                       <tr>
-                          <th>Tên banner</th>
+                          <th>Tên Banner</th>
                           <th>Ảnh</th>
+                          <th>Link</th>
+                          <th>Hành Động</th>
                       </tr>
                   </thead>
                   <tbody>
                     @foreach($banner as $value)
-                    <tr>
-                        <th>Banner slide 1</th>
-                        <th><img src="{{url('images')}}/{{ $value->banner1 }}" style="width:200px" alt=""></th>
-                    </tr>
+                      <tr>
+                          <th>{{$value->name}}</th>
+                          <th><img src="{{url('images')}}/{{$value->image}}" style="width:100px" alt=""></th>
+                          <th>{{$value->link}}</th>
+                          <th><a href="{{ route('banner.edit',$value->id) }}" title="Sửa"><i class="fa fa-fw fa-pencil-square-o" style="color:red"></i></a></th>
+                      </tr>
+                    
                     @endforeach
-                    @foreach($banner as $value)
-                    <tr>
-                        <th>Banner slide 2</th>
-                        <th><img src="{{url('images')}}/{{ $value->banner2 }}" style="width:200px" alt=""></th>
-                    </tr>
-                    @endforeach
-                    @foreach($banner as $value)
-                    <tr>
-                        <th>Banner slide 3</th>
-                        <th><img src="{{url('images')}}/{{ $value->banner3 }}" style="width:200px" alt=""></th>
-                    </tr>
-                    @endforeach
-                    @foreach($banner as $value)
-                    <tr>
-                        <th>Banner sản phẩm bán chạy nhất</th>
-                        <th><img src="{{url('images')}}/{{ $value->banner4 }}" style="width:60px" alt=""></th>
-                    </tr>
-                    @endforeach
-                   
                   </tbody>
                 
                   

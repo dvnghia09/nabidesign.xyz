@@ -4,18 +4,18 @@
              <div class="slide">
                   <div class="slide-move">
                          <div class="slide-move__item active">
-                             <a href="" class="slide-move__item-link">
-                                   <img class="slide-move__item-img" src="{{url('images')}}/{{$banner->banner1}}"alt="">
+                             <a href="{{$sliderOne->link}}" target="_blank" class="slide-move__item-link">
+                                <img class="slide-move__item-img" src="{{url('images')}}/{{$sliderOne->image}}"alt="">
                              </a>
                          </div>
                          <div class="slide-move__item">
-                            <a href="" class="slide-move__item-link">
-                                  <img class="slide-move__item-img" src="{{url('images')}}/{{$banner->banner2}}"alt="">
+                            <a href="{{$sliderTwo->link}}" target="_blank" class="slide-move__item-link">
+                                <img class="slide-move__item-img" src="{{url('images')}}/{{$sliderTwo->image}}"alt="">
                             </a>
                         </div>
                         <div class="slide-move__item">
-                            <a href="" class="slide-move__item-link">
-                                  <img class="slide-move__item-img" src="{{url('images')}}/{{$banner->banner3}}"alt="">
+                            <a href="{{$sliderThree->link}}" target="_blank" class="slide-move__item-link">
+                                <img class="slide-move__item-img" src="{{url('images')}}/{{$sliderThree->image}}"alt="">
                             </a>
                         </div>
                        
@@ -128,8 +128,8 @@
                         <div class="row">
                             <!-- img top bán CHẠY -->
                             <div class="col l-6 m-12 c-12">                               
-                                <a class="hot-item" href="">
-                                    <img class="hot-item-img" src="{{url('images')}}/{{$banner->banner4}}" alt="">
+                                <a class="hot-item" href="{{ $proHot->link }}">
+                                    <img class="hot-item-img" src="{{url('images')}}/{{$proHot->image}}" alt="">
                                </a>                               
                             </div>
 
@@ -188,7 +188,7 @@
                      <div class="row">
                          @foreach($lookBook as $value)
                         <div class="col l-3 m-6 c-6 ">
-                            <a href="{{$value->link}}" class="look-book-item">
+                            <a href="{{$value->link}}" target="_blank" class="look-book-item">
                                 <img src="{{url('images')}}/{{$value->image}}" alt="look-book" class="look-book-image">
                                 <h2 class="name-look-book">{{$value->name}}</h2>
                             </a>

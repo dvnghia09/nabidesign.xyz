@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\LookBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\BannerController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\CheckOutController;
 /*
 |--------------------------------------------------------------------------

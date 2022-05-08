@@ -13,31 +13,51 @@
     margin:0;
     padding-top: 20px;
   }
+
 </style>
+<div class="wide grid no-margin ">
+  <div class="breadcrumb ">
+        <ol class="breadcrumb-arrows hide-on-mobile">
+          <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="/" target="_self"><i class="fa fa-home"></i>Trang chủ</a><i class="fa fa-angle-right icon-right" ></i></li>
+          <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="{{ route('product.category',$catePro->id) }}">{{ $catePro->name }}</a><i class="fa fa-angle-right icon-right" ></i></li>
+          <li class="breadcrumb-item disable"><span>{{ $product->name }}</span></li>
+        </ol>
+  </div>
+</div>
 
 <div class = "card-wrapper">
       <div class = "card">
-        <!-- card left -->
         <div class = "product-imgs">
-          <div class = "img-display">
-            <div class = "img-showcase">
-              <img style="width: 100%" src = "{{ url('images') }}/{{$product->image}}" >
-              
-              <!-- Phần ảnh mô tả -->
-              @foreach($images as $image)
-                <img class="" style="width: 100%" src = "{{ url('images') }}/{{$image}}" >
-              @endforeach
-            </div>
-          </div>
-          <div class = "img-select">
-            <div class = "img-item">
+          <!-- Ảnh detail trên mobile -->
+          <div class="slideshow-container">
+                  <!-- Kết hợp hình ảnh và nội dung cho mội phần tử trong slideshow-->
+                  <div class="mySlides fade">
+                    <img style="width: 100%" src = "{{ url('images') }}/{{$product->image}}" >
+                    <div class="text">1 / {{count($images) + 1}}</div>
+                  </div>
+                  @foreach($images as $key => $image)
+                  <div class="mySlides fade">
+                    <img style="width: 100%" src = "{{ url('images') }}/{{$image}}" >
+                    <div class="text">{{$key + 2}} / {{count($images) + 1}}</div>
+                  </div>
+                  @endforeach
+                  <!-- Nút điều khiển mũi tên-->
+                  <a class="prev" onclick="plusSlides(-1)">❮</a>
+                  <a class="next" onclick="plusSlides(1)">❯</a>
+                </div>
+                
+
+            
+          <!--END Ảnh detail trên mobile -->
+          <div class = "img-select hide-on-mobile" >
+            <div class = "img-item" onclick="currentSlide(1)">
               <a href = "#" data-id = "1">
                 <img style="width: 100%" src = "{{ url('images') }}/{{$product->image}}" alt = "shoe image">
               </a>
             </div>
 
             @foreach($images as $key => $image)
-              <div class = "img-item">
+              <div class = "img-item" onclick="currentSlide({{$key+2}})">
                 <a href = "#" data-id = "{{ $key + 2 }}">
                     <img style="width: 100%" src = "{{ url('images') }}/{{$image}}" alt = "shoe image">
                 </a>
@@ -55,10 +75,7 @@
             <p class = "new-price">Giá sale: <span>{{ number_format($product->sale_price,0,".",".") }} đ</span></p>
           </div>
 
-          <div class = "product-detail">
-            <h2>Mô tả về sản phẩm: </h2>
-            {!! $product->description !!}
-          </div>
+          
           <!-- Add sản phẩn vào giỏ hàng -->
           <form method="POST" action="{{ route('add.cart') }}" class = "purchase-info">
             @csrf
@@ -99,6 +116,10 @@
               Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
             </button>
           </form>
+          <div class = "product-detail">
+            <h2>Mô tả về sản phẩm: </h2>
+            {!! $product->description !!}
+          </div>
         </div>
       </div>
     </div>
@@ -151,22 +172,36 @@
                     </div>
                     
              </div>
-    
-
-        
-
-        
-
- <script>
-    
-
-    // Khi click vào chọn size và màu
-
-
- </script>            
+             
 @stop
 
 @section('javascrip')
-<script src="{{ url('frontend') }}/js/product_detail.js"></script>
+    <script src="{{ url('frontend') }}/js/product_detail.js"></script>
+    <script>
+      // khi chọn size và màu 
+
+    var sizes = document.querySelectorAll('.lable-size')
+    var colors = document.querySelectorAll('.lable-color')
+
+
+
+    sizes.forEach(function(item,index){
+        item.onclick = function(){
+            if(document.querySelector('.lable-size.border-black')){
+                document.querySelector('.lable-size.border-black').classList.remove('border-black')
+            }
+            this.classList.add('border-black');
+        }
+    })
+
+    colors.forEach(function(item,index){
+        item.onclick = function(){
+            if(document.querySelector('.lable-color.border-black')){
+                document.querySelector('.lable-color.border-black').classList.remove('border-black')
+            }
+            this.classList.add('border-black');
+        }
+    })
+    </script>
 @stop
          

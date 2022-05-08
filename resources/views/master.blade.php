@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ url('frontend') }}/font/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="{{ url('frontend') }}/font/fontawesome-free-5.15.3-web/fontawesome-free-5.15.3-web/css/all.css">
     
-    <title>Nabi Design</title>
+    <title>Nabi design</title>
 </head>
 <body>
     
@@ -145,7 +145,7 @@
                             <a class="contact-item_link" href="tel:0919295123">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/call.png" alt="">
                                 <h2 class="contact-item_content">MUA HÀNG (8h00-22h00, T2-CN)</h2>
-                            <p class="contact-item_content-sub">Mua hàng : 0913.408.222 /  CSKH : 033.373.6888</p>
+                            <p class="contact-item_content-sub">Mua hàng : 0919.295.123 /  CSKH : 056.467.0223</p>
                             </a>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                             <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/thuhang.png" alt="">
                                 <h2 class="contact-item_content">THỬ NGAY TẠI SHOWROOMS</h2>
-                            <p class="contact-item_content-sub">04 showroom tại hà nội</p>
+                            <p class="contact-item_content-sub">showroom tại hà nội</p>
                             </a>
                         </div>
                     </div>
@@ -171,13 +171,13 @@
                            <h4 class="footer__content-heading">
                             CHÍNH SÁCH VÀ QUY ĐỊNH:
                            </h4>
-                           <a href="" class="footer__content-title">Cách thức đặt hàng</a>
-                           <a href="" class="footer__content-title">Chính sách thành viên</a>
-                           <a href="" class="footer__content-title">Chính sách giao hàng</a>
-                           <a href="" class="footer__content-title">Quy định đổi trả</a>
-                           <a href="" class="footer__content-title">Hình thức thanh toán</a>
-                           <a href="" class="footer__content-title">Chính sách bảo mật</a>
-                           <a href="" class="footer__content-title">Chính sách xử lý khiêu nại</a>
+                           <a href="tel:0919295123" class="footer__content-title">Cách thức đặt hàng</a>
+                           <a href="tel:0919295123" class="footer__content-title">Chính sách thành viên</a>
+                           <a href="tel:0919295123" class="footer__content-title">Chính sách giao hàng</a>
+                           <a href="tel:0919295123" class="footer__content-title">Quy định đổi trả</a>
+                           <a href="tel:0919295123" class="footer__content-title">Hình thức thanh toán</a>
+                           <a href="tel:0919295123" class="footer__content-title">Chính sách bảo mật</a>
+                           <a href="tel:0919295123" class="footer__content-title">Chính sách xử lý khiêu nại</a>
                          </div>
                     </div>
                     <div class="col l-3 m-6 c-6 ">
@@ -186,7 +186,7 @@
                          VỀ CHÚNG TÔI:
                         </h4>
                         <p class="footer__content-title"><strong>Công ty TNHH NABI SHOP</strong></p>
-                        <p class="footer__content-title"><strong>Địa chỉ: </strong>Số 344 Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, Thành phố Hà Nội</p>
+                        <p class="footer__content-title"><strong>Địa chỉ: </strong>Số 96 Di Ái, Xã Di Trạch, Quận Hoài Đức, Thành phố Hà Nội</p>
                         <p class="footer__content-title"><strong>Mã số doanh nghiệp: </strong>0108901419 do Sở kế hoạch và đầu tư thành phố Hà Nội cấp ngày 17/09/2019</p>
                         <p class="footer__content-title"><strong>Điện thoại: </strong>091.9295.123</p>
                         <p class="footer__content-title"><strong>Email: </strong>nghiadv13@gmail.com</p>

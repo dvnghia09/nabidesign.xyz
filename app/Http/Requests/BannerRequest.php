@@ -24,28 +24,19 @@ class BannerRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|max:1000',
+            'link' => 'required|max:1000',
+            'file' => 'mimes:jpg,jpeg,png',
             
-                'file1'=> 'image|mimes:jpg,jpeg,png',
-                'file2'=> 'image|mimes:jpg,jpeg,png',
-                'file3'=> 'image|mimes:jpg,jpeg,png',
-                'file4'=> 'image|mimes:jpg,jpeg,png',
-
-
         ];
     }
 
     public function messages(){
         return [
-            'file1.mimes'  => 'Trường này phải là ảnh',
-            'file2.mimes'  => 'Trường này phải là ảnh',
-            'file3.mimes'  => 'Trường này phải là ảnh',
-            'file4.mimes'  => 'Trường này phải là ảnh',
-            'file1.image'  => 'Trường này phải là ảnh',
-            'file2.image'  => 'Trường này phải là ảnh',
-            'file3.image'  => 'Trường này phải là ảnh',
-            'file4.image'  => 'Trường này phải là ảnh',
-            
-        ]; 
+            'name.required'=> 'Tên không được để rỗng!',
+            'link.required'=> 'Link không được để rỗng!',
+            'file.mimes' => 'Định dạng hình ảnh không đúng',
+        ];
     }
 }
 

@@ -16,7 +16,13 @@ use App\Models\Banner;
 class HomeController extends Controller
 {
     public function home(){
-        $banner = Banner::find(1);
+        // Slider
+        $sliderOne = Banner::find(1);
+        $sliderTwo = Banner::find(2);
+        $sliderThree = Banner::find(3);
+        // Banner product
+        $proHot = Banner::find(4);;
+        
         $category = Category::all()->sortByDesc("id");
         // Mẫu mới
         $product = Product::all()->sortByDesc("id")->take(8);
@@ -30,7 +36,7 @@ class HomeController extends Controller
 
         $cart = new Cart();
         $totalQuantity = $cart->getTotalQuantity();
-        return view('home', compact('product','category','totalQuantity','banner','productSale','productTopSale','lookBook'));
+        return view('home', compact('product','category','totalQuantity','productSale','productTopSale','lookBook','sliderOne','sliderTwo','sliderThree','proHot'));
     }
 
 
@@ -44,6 +50,8 @@ class HomeController extends Controller
 
         $cate_id = $product->category_id;
         $productSame = Product::where('category_id',$cate_id)->where('id','<>', $id)->get();
+
+        $catePro =  CategorySub::find($cate_id);
 
         $attr = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
         $attrColor = AttrProduct::where('name','color')->pluck('id')->toArray();
@@ -68,14 +76,13 @@ class HomeController extends Controller
             $size = AttrProduct::whereIn('id',$sizeArr)->pluck('value')->toArray();
             
 
-        return view('product-detail',compact('category','product','images','color','size','productSame'));
+        return view('product-detail',compact('category','product','images','color','size','productSame','catePro'));
     }
 
     // Sản phẩm theo danh mục
     public function productCate($id){
         $nameCate = CategorySub::find($id);
         $product = Product::where('category_id',$id)->get();
-
         
         return view('product-cate',compact('product','nameCate'));
     }

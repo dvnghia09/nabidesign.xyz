@@ -1,15 +1,19 @@
 @extends('master')
 @section('home')
 <style>
-    .product-heading__title-cate{
-        margin-top:90px;
+    .mg-top{
+        margin-top:84px !important;
     }
 </style>
 
              <div class="products">
                 <div class="grid wide">
                     <div class="product-new">
-                          <div class="product-heading">
+                          <div class="product-heading mg-top">
+                            <ol class="breadcrumb-arrows hide-on-mobile">
+                                <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="/" target="_self"><i class="fa fa-home"></i>Trang chủ</a><i class="fa fa-angle-right icon-right" ></i></li>
+                                <li class="breadcrumb-item disable"><span>Tìm kiếm</span></li>
+                            </ol>
                              <h2 class="product-heading__title-cate">Kết quả tìm kiếm:{{ $key }}</h2>
                           </div>
                           <div class="row">

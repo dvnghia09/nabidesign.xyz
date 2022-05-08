@@ -4,20 +4,34 @@
 @stop
 
 @section('home')
+
     @if($totalQuantity == 0)
+
     <div class="no-cart-box">
+    <div class="wide grid no-margin ">
+        <ol class="breadcrumb-arrows hide-on-mobile">
+          <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="/" target="_self"><i class="fa fa-home"></i>Trang chủ</a><i class="fa fa-angle-right icon-right" ></i></li>
+          <li class="breadcrumb-item disable"><span>Giỏ hàng</span></li>
+        </ol>
+    </div>
         <img class="no-cart" src="{{url('frontend')}}/img/empty-cart.png" alt="Không có sản phẩm">
     </div>
     @else
     <div class="grid wide">
 
         <main>
+        <div class="wide grid no-margin ">
+          <ol class="breadcrumb-arrows no-margin hide-on-mobile">
+            <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="/" target="_self"><i class="fa fa-home"></i>Trang chủ</a><i class="fa fa-angle-right icon-right" ></i></li>
+            <li class="breadcrumb-item disable"><span>Giỏ hàng</span></li>
+          </ol>
+        </div>
             <div class="basket">
-              <div class="basket-module">
+              <!-- <div class="basket-module">
                 <label for="promo-code">Nhập mã khuyến mãi</label>
                 <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
                 <button class="promo-code-cta">Nhập</button>
-              </div>
+              </div> -->
               <div class="basket-labels">
                 <ul>
                   <li class="item item-heading">Sản phẩm</li>

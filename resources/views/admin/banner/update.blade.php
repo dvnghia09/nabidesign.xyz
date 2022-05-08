@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Trang quản lý banner 
+        Sửa Banner 
       </h1>
     </section>
 
@@ -15,81 +15,39 @@
      <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Sửa banner</h3>
-                
-            </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form method="POST" action="{{ route('banner.update',1) }}" enctype='multipart/form-data'>
+            <form method="POST" action="{{ route('banner.update',$banner->id) }}" enctype='multipart/form-data'>
                 @csrf
                 @method('PUT')
               <div class="box-body">
-                
                 <div class="form-group">
-                  <label for="file-upload">Banner slide 1</label>
+                  <input type="hidden"  value="{{ $banner->name }}" name="name" class="form-control @error('name') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
+                    @error('name')
+                        <span class="message-err" style="color:red;">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="example1">Đường dẫn look book</label>
+                  <input type="text" value="{{ $banner->link }}" name="link" class="form-control @error('link') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
+                    @error('link')
+                        <span class="message-err" style="color:red;">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                  <label for="file-upload">Ảnh Look Book</label>
                   <div class="imageFile" style="height:120px;width:100%;">
                     <label for="file-upload" class="custom-file-upload">
-                      <img src="{{url('images')}}/{{$banner->banner1}}" id="image" style="height:100%;border-radius:5px;" style="" alt="">
+                      <img src="{{url('images')}}/{{$banner->image}}" id="image" style="height:100%;border-radius:5px;" style="" alt="">
                     </label>
                   </div>
                   <label for="file-upload" style="margin-top: 4px;" class="custom-file">
                       <i class="fa fa-cloud-upload"></i>
                       Chọn ảnh
                   </label>
-                  <input id="file-upload" type="file" value="{{old('file')}}" onchange="chooseFile(this)" name="file1" class="form-control dn @error('image') is-invalid @enderror" >
-                    @error('file1')
-                        <span class="message-err" style="color:red;">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="file-upload2">Banner slide 2</label>
-                  <div class="imageFile" style="height:120px;width:100%;">
-                    <label for="file-upload2" class="custom-file-upload">
-                      <img src="{{url('images')}}/{{$banner->banner2}}" id="image2" style="height:100%;border-radius:5px;" style="" alt="">
-                    </label>
-                  </div>
-                  <label for="file-upload2" style="margin-top: 4px;" class="custom-file">
-                      <i class="fa fa-cloud-upload"></i>
-                      Chọn ảnh
-                  </label>
-                  <input id="file-upload2" type="file" value="{{old('file')}}" onchange="chooseFiles(this)" name="file2" class="form-control dn @error('image') is-invalid @enderror" >
-                    @error('file2')
-                        <span class="message-err" style="color:red;">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="file-upload3">Banner slide 3</label>
-                  <div class="imageFile" style="height:120px;width:100%;">
-                    <label for="file-upload3" class="custom-file-upload">
-                      <img src="{{url('images')}}/{{$banner->banner3}}" id="image3" style="height:100%;border-radius:5px;" style="" alt="">
-                    </label>
-                  </div>
-                  <label for="file-upload3" style="margin-top: 4px;" class="custom-file">
-                      <i class="fa fa-cloud-upload"></i>
-                      Chọn ảnh
-                  </label>
-                  <input id="file-upload3" type="file" value="{{old('file')}}" onchange="chooseFiless(this)" name="file3" class="form-control dn @error('image') is-invalid @enderror" >
-                    @error('file3')
-                        <span class="message-err" style="color:red;">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                  <label for="file-upload4">Banner product</label>
-                  <div class="imageFile" style="height:120px;width:100%;">
-                    <label for="file-upload4" class="custom-file-upload">
-                      <img src="{{url('images')}}/{{$banner->banner4}}" id="image4" style="height:100%;border-radius:5px;" style="" alt="">
-                    </label>
-                  </div>
-                  <label for="file-upload4" style="margin-top: 4px;" class="custom-file">
-                      <i class="fa fa-cloud-upload"></i>
-                      Chọn ảnh
-                  </label>
-                  <input id="file-upload4" type="file" value="{{old('file')}}" onchange="chooseFilesss(this)" name="file4" class="form-control dn @error('image') is-invalid @enderror" >
-                    @error('file4')
+                  <input id="file-upload" type="file" value="{{old('file')}}" onchange="chooseFile(this)" name="file" class="form-control dn @error('image') is-invalid @enderror" >
+                    @error('file')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
@@ -131,43 +89,7 @@
 
           }
         }
-
-        function chooseFiles(fileInput){
-          if(fileInput.files && fileInput.files[0]){
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-              $('#image2').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(fileInput.files[0]);
-
-          }
-        }
-
-        function chooseFiless(fileInput){
-          if(fileInput.files && fileInput.files[0]){
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-              $('#image3').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(fileInput.files[0]);
-
-          }
-        }
-
-        function chooseFilesss(fileInput){
-          if(fileInput.files && fileInput.files[0]){
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-              $('#image4').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(fileInput.files[0]);
-
-          }
-        }
-  
+        var Showimg =  document.querySelectorAll('.image-preview');
 
         
 

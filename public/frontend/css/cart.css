@@ -80,7 +80,7 @@ main {
   overflow: hidden;
   padding: 1rem 0;
   width: 100%;
-  margin-top: 90px;
+  margin-top: 80px;
 }
 
 .basket,
@@ -309,6 +309,10 @@ font-weight: 600;}
   width: 100%;
 }
 
+.no-margin{
+  padding: 0;
+}
+
 .summary-delivery-selection {
   background-color: #ccc;
   border: 1px solid #aaa;
@@ -453,6 +457,10 @@ button.btn-update {
 
   .product-image {
     width: 26%;
+  }
+
+  main{
+    margin-top: 70px;
   }
 
 }

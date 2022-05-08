@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginAdminRequest;
+use App\Models\Oder;
 
 class AdminController extends Controller
 {
     public function home(){
-
-        return view('admin.home');
-
+        $order = Oder::all();
+        return view('admin.home',compact('order'));
     }
 
     public function login(){

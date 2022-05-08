@@ -95,3 +95,22 @@ th{
 .dn{
 	display: none !important;
 }
+
+.main-sidebar {
+    position: fixed !important;
+}
+
+.navbar-static-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.main-header {
+    position: fixed;
+}
+
+.content-wrapper {
+    margin-top: 50px;
+}

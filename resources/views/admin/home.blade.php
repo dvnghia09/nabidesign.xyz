@@ -19,7 +19,7 @@
 
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{ count($order) }}</h3>
                         <p>Đơn hàng</p>
                     </div>
                     <div class="icon">

@@ -1,55 +1,30 @@
-const imgs = document.querySelectorAll('.img-select a');
-    const imgBtns = [...imgs];
-    let imgId = 1;
+var slideIndex = 1;
+showSlides(slideIndex);
 
-    imgBtns.forEach((imgItem) => {
-        imgItem.addEventListener('click', (event) => {
-            event.preventDefault();
-            imgId = imgItem.dataset.id;
-            slideImage();
-        });
-    });
-
-    function slideImage(){
-        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
-
-        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
-    }
-
-    window.addEventListener('resize', slideImage);
-
-
-
-function slideImage(){
-    const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
-
-    document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+function plusSlides(n) {
+  showSlides(slideIndex += n);
 }
 
-window.addEventListener('resize', slideImage);
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
 
 
-// khi chọn size và màu 
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+// phần ảnh
 
-    var sizes = document.querySelectorAll('.lable-size')
-    var colors = document.querySelectorAll('.lable-color')
 
-
-
-    sizes.forEach(function(item,index){
-        item.onclick = function(){
-            if(document.querySelector('.lable-size.border-black')){
-                document.querySelector('.lable-size.border-black').classList.remove('border-black')
-            }
-            this.classList.add('border-black');
-        }
-    })
-
-    colors.forEach(function(item,index){
-        item.onclick = function(){
-            if(document.querySelector('.lable-color.border-black')){
-                document.querySelector('.lable-color.border-black').classList.remove('border-black')
-            }
-            this.classList.add('border-black');
-        }
-    })

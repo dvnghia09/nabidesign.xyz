@@ -4,8 +4,12 @@
 @stop
 @section('home')
 <div class="grid wide check-out-container">
-<h2 class="checkout-title" >Trang đặt hàng</h2>
-<p class="checkout-title-sub" >Vui lòng nhập các trường bên dưới để tiến hành đặt hàng</p>
+
+        <ol class="breadcrumb-arrows hide-on-mobile">
+          <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="/" target="_self"><i class="fa fa-home"></i>Trang chủ</a><i class="fa fa-angle-right icon-right" ></i></li>
+          <li class="breadcrumb-item disable"><span>Đặt hàng</span></li>
+        </ol>
+<p class="checkout-title-sub" >Vui lòng nhập các trường bên dưới để hoàn tất đơn hàng của bạn</p>
 <div class="row row-checkout">
   <!-- Sản phẩm -->
   <div class="col c-12 m-12 l-6">

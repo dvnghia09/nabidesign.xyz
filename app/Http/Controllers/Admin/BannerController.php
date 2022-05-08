@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Oder;
-use App\Models\OderDetail;
+use App\Models\Banner;
+use App\Http\Requests\BannerRequest;
+use Illuminate\Support\Facades\File;
 
-class OrderController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,8 @@ class OrderController extends Controller
      */
     public function index()
     {   
-        
-        $order = Oder::all();
-        return view('admin.order.index',compact('order'));
+        $banner = Banner::all();
+        return view('admin.banner.index',compact('banner'));
     }
 
     /**
@@ -60,8 +60,9 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
-        
+    {
+        $banner = Banner::find($id);
+        return view('admin.banner.update',compact('banner'));
     }
 
     /**
@@ -71,15 +72,28 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {   
+    public function update(BannerRequest $request, $id)
+    {
+        $banner = Banner::find($id);
         
-        $order = Oder::find($id);
-        $order->update([
-            'status' => $request->status
+        // Update  ảnh
+        if($request->hasFile('file')){
+        // Xóa ảnh cũ
+        File::delete('images/'.$lookBook->image); 
+
+        $imageName = time().'_'.$request->file('file')->getClientOriginalName();
+        $request->file->move(public_path('images'),$imageName);
+        }else{
+            $imageName = $banner->image;
+        }
+
+        $banner->update([
+            'name' => $request->name,
+            'link' => $request->link,
+            'image' => $imageName,
         ]);
 
-        return redirect()->route('order.index');
+        return redirect()->route('banner.index')->with('message','Sửa banner thành công');
     }
 
     /**
@@ -89,12 +103,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
-        OderDetail::where('oder_id',$id)->delete();
-
-        $order = Oder::find($id);
-        $order->delete();
-
-        return redirect()->route('order.index');
+    {
+        //
     }
 }

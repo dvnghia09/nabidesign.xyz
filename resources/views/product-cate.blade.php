@@ -1,15 +1,18 @@
 @extends('master')
 @section('home')
-<style>
-    .product-heading__title-cate{
-        margin-top:90px;
-    }
-</style>
-
+<div class="wide grid no-margin ">
+  <div class="breadcrumb ">
+        <ol class="breadcrumb-arrows hide-on-mobile">
+          <li class="breadcrumb-item"><a class="breadcrumb-item-link" href="/" target="_self"><i class="fa fa-home"></i>Trang chủ</a><i class="fa fa-angle-right icon-right" ></i></li>
+          <li class="breadcrumb-item disable"><span>{{ $nameCate->name }}</span></li>
+          
+        </ol>
+  </div>
+</div>
              <div class="products">
                 <div class="grid wide">
                     <div class="product-new">
-                          <div class="product-heading">
+                          <div class="product-heading product-heading-no-mg">
                              <h2 class="product-heading__title-cate">Danh mục:{{ $nameCate->name }}</h2>
                           </div>
                           <div class="row">
