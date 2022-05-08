@@ -27,7 +27,9 @@ class HomeController extends Controller
         // Mẫu mới
         $product = Product::all()->sortByDesc("id")->take(8);
         // Top sale
-        $productSale = Product::orderBy('sale_price', 'ASC')->take(8)->get();
+        $cateSale =  CategorySub::where('name', 'LIKE', "%sale%")->pluck('id')->toArray();
+        $productSale = Product::whereIn('category_id',$cateSale)->orderBy('sale_price', 'ASC')->take(8)->get();
+
         // Top bán chạy
         $productTopSale = Product::orderBy('quantity', 'ASC')->take(4)->get();
 
@@ -104,7 +106,8 @@ class HomeController extends Controller
     // Tất cả top sale
     public function seeAllSale(){
         $name = 'Top sale';
-        $product = Product::orderBy('sale_price', 'ASC')->get();
+        $cateSale =  CategorySub::where('name', 'LIKE', "%sale%")->pluck('id')->toArray();
+        $product = Product::whereIn('category_id',$cateSale)->orderBy('sale_price', 'ASC')->get();
         return view('see-all',compact('product','name'));
     }
 
