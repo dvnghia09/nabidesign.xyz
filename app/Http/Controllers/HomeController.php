@@ -12,6 +12,7 @@ use App\Models\AttrProduct;
 use App\Models\LookBook;
 use App\Helper\Cart;
 use App\Models\Banner;
+use App\Models\OderDetail;
 
 class HomeController extends Controller
 {
@@ -27,11 +28,20 @@ class HomeController extends Controller
         // Mẫu mới
         $product = Product::all()->sortByDesc("id")->take(8);
         // Top sale
-        $cateSale =  CategorySub::where('name', 'LIKE', "%sale%")->pluck('id')->toArray();
-        $productSale = Product::whereIn('category_id',$cateSale)->orderBy('sale_price', 'ASC')->take(8)->get();
+        // $cateSale =  CategorySub::where('name', 'LIKE', "%sale%")->pluck('id')->toArray();
+        $productSale = Product::orderByRaw('sale_price/price ASC')->take(8)->get();
 
         // Top bán chạy
-        $productTopSale = Product::orderBy('quantity', 'ASC')->take(4)->get();
+        $ads = OderDetail::pluck('id_product')->toArray();
+        $test = array_count_values($ads);
+        arsort($test);
+        $abc = array_keys($test);
+
+        $productTopSale = Product::whereIn('id', $abc)
+        ->orderByRaw("field(id,".implode(',',$abc).")")
+        ->take(4)
+        ->get();
+
 
         // Album look book
         $lookBook = LookBook::all();
@@ -106,15 +116,22 @@ class HomeController extends Controller
     // Tất cả top sale
     public function seeAllSale(){
         $name = 'Top sale';
-        $cateSale =  CategorySub::where('name', 'LIKE', "%sale%")->pluck('id')->toArray();
-        $product = Product::whereIn('category_id',$cateSale)->orderBy('sale_price', 'ASC')->get();
+        $product = Product::orderByRaw('sale_price/price ASC')->take(12)->get();
         return view('see-all',compact('product','name'));
     }
 
     // Tất cả top bán chạy
     public function seeAllBuy(){
         $name = 'Top bán chạy';
-        $product = Product::orderBy('quantity', 'ASC')->get();
+        $ads = OderDetail::pluck('id_product')->toArray();
+        $test = array_count_values($ads);
+        arsort($test);
+        $abc = array_keys($test);
+
+        $product = Product::whereIn('id', $abc)
+        ->orderByRaw("field(id,".implode(',',$abc).")")
+        ->take(8)
+        ->get();
         return view('see-all',compact('product','name'));
     }
 

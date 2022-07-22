@@ -8,6 +8,8 @@ use App\Http\Requests\AddOderRequest;
 use App\Models\Oder;
 use App\Models\OderDetail;
 use Session;
+use Mail;
+use App\Mail\NewOrder;
 
 class CheckOutController extends Controller
 {
@@ -48,6 +50,7 @@ class CheckOutController extends Controller
 
 
         if($oder){
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewOrder($oder->id, $cart->getItems()));
             Session::forget('cart');
             return redirect()->route('checkout.thanks');
         }
