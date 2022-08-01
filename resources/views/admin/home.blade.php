@@ -33,7 +33,7 @@
 
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>53</h3>
+                        <h3>{{ $view }}</h3>
                         <p>Số lượt truy cập</p>
                     </div>
                     <div class="icon">
@@ -47,7 +47,7 @@
 
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{ number_format($dt, 0, '', ',')}} đ</h3>
                         <p>Doanh thu</p>
                     </div>
                     <div class="icon">
@@ -61,7 +61,7 @@
 
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>65<sup style="font-size: 20px">%</sup></h3>
+                        <h3>{{ceil(((count($order)/$view)*100))}}<sup style="font-size: 20px">%</sup></h3>
                         <p>Tỉ lệ chuyển đổi</p>
                     </div>
                     <div class="icon">

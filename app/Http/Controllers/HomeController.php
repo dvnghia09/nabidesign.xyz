@@ -13,10 +13,17 @@ use App\Models\LookBook;
 use App\Helper\Cart;
 use App\Models\Banner;
 use App\Models\OderDetail;
+use Session;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function home(){
+        
+        if (!Session::get("view")) { //nếu chưa có session
+            Session::put("view", 1); //set giá trị cho session
+            DB::table('views')->insert(['view' => 1]);
+        }
         // Slider
         $sliderOne = Banner::find(1);
         $sliderTwo = Banner::find(2);
@@ -37,10 +44,13 @@ class HomeController extends Controller
         arsort($test);
         $abc = array_keys($test);
 
-        $productTopSale = Product::whereIn('id', $abc)
-        ->orderByRaw("field(id,".implode(',',$abc).")")
-        ->take(4)
-        ->get();
+        $productTopSale = [];
+        if ($abc) {
+            $productTopSale = Product::whereIn('id', $abc)
+            ->orderByRaw("field(id,".implode(',',$abc).")")
+            ->take(4)
+            ->get();
+        }
 
 
         // Album look book

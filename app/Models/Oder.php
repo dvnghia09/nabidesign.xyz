@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Oder extends Model
 {   
-    protected $fillable = ['name','phone','addrest','quantity','note','total_price','status'];
+    protected $fillable = ['name','phone','addrest','quantity','note','total_price','status','id_user'];
     use HasFactory;
 
     public function orderDetail(){

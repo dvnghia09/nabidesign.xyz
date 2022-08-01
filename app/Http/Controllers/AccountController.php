@@ -8,18 +8,25 @@ use Auth;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Category;
+use App\Models\Oder;
+use Session;
 
 class AccountController extends Controller
 {
     public function account(){
+        
+        if (strpos(url()->previous(), 'account') == false) {
+            session(['ads' => url()->previous()]);
+        }
+        
         return view('account');
     }
 
     public function user(){
         
         $category = Category::all()->sortByDesc("id");
-    
-        return view('user',compact('category'));
+        $order = Oder::where('id_user', Auth::id())->get();
+        return view('user',compact('category', 'order'));
     }
 
     public function register(RegisterRequest $req){
@@ -36,8 +43,13 @@ class AccountController extends Controller
 
     public function login(Request $req){
         if (Auth::attempt(['email'=>$req->email,'password'=>$req->password])) {
- 
-            return redirect()->route('user');
+            if (strpos(Session::get('ads'), 'cart') != false) {
+                Session::forget('ads');
+                return redirect()->route('checkout.index');
+            } else {
+                Session::forget('ads');
+                return redirect()->route('user');
+            }
         }else{
             return redirect()->back()->with('message','Đăng nhập thất bại !');
         }

@@ -56,10 +56,11 @@
     <div class="container">
       <form action="" method="POST">
             @csrf
+            <input type="hidden" name="id_user" value="{{ Auth::id() }}">
             <h3 class="form-title" >Thông tin giao hàng</h3>
             <div class="group-form">
                 <label for="fname">Tên :</label>
-                <input type="text" id="fname" value="{{old('name')}}" class="@error('name') is-invalid @enderror" name="name" placeholder="Nhập tên của bạn ...">
+                <input type="text" id="fname" value="{{ Auth::user() ? Auth::user()->name : '' }}" class="@error('name') is-invalid @enderror" name="name" placeholder="Nhập tên của bạn ...">
                     @error('name')
                         <p class="message-err" style="color:red;">{{ $message }}</p>
                     @enderror

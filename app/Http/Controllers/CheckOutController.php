@@ -33,6 +33,7 @@ class CheckOutController extends Controller
             'quantity' => $totalQuantity,
             'total_price' => $totalPrice,
             'note' => $request->note,
+            'id_user' => $request->id_user,
         ]);
 
         foreach($cart->getItems() as $value){

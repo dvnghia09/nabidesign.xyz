@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Danh sách tất cả sản phẩm
+        Danh sách tất cả LookBook
       </h1>
     </section>
 

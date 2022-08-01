@@ -95,8 +95,15 @@ Route::prefix('/')->group(function(){
     // Trang quản lý của người dùng
     Route::middleware('checkUser')->prefix('/')->group(function () {
         
-        Route::get('/user',[AccountController::class,'user'])->name('user');
-        Route::get('logout-user', [AccountController::class,'logout'])->name('logout.user');
+         // -------------------Đặt hàng(checkout)--------------------------
+         Route::get('/user',[AccountController::class,'user'])->name('user');
+         Route::get('logout-user', [AccountController::class,'logout'])->name('logout.user');
+         
+         Route::get('checkout', [CheckOutController::class,'index'])->name('checkout.index');
+         Route::post('checkout', [CheckOutController::class,'AddOder'])->name('checkout.addOder');
+         // Trang cảm ơn
+         Route::get('thanks', [CheckOutController::class,'thanks'])->name('checkout.thanks');
+         
   
     });
     // Giỏ hàng
@@ -107,12 +114,6 @@ Route::prefix('/')->group(function(){
     Route::post('update-cart', [CartController::class,'update'])->name('update.cart');
     // Xóa sản phẩm trong giỏ hàng 
     Route::get('delete-cart/{id}',[CartController::class,'delete'] )->name('delete.cart');
-
-    // -------------------Đặt hàng(checkout)--------------------------
-    Route::get('checkout', [CheckOutController::class,'index'])->name('checkout.index');
-    Route::post('checkout', [CheckOutController::class,'AddOder'])->name('checkout.addOder');
-    // Trang cảm ơn
-    Route::get('thanks', [CheckOutController::class,'thanks'])->name('checkout.thanks');
 
 
 
