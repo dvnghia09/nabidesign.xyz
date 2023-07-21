@@ -19,11 +19,11 @@ class CreateProductsTable extends Migration
             $table->integer('quantity')->unsigned();
             $table->bigInteger('price');
             $table->bigInteger('sale_price');
-            $table->string('image', 255)->nullable();
+            $table->string('image', 255);
             $table->text('description')->nullable();
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('category_subs');
-           
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('category_subs')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

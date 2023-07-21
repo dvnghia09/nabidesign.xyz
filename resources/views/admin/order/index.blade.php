@@ -52,56 +52,52 @@
                         <th>Trạng thái</th>
                         <th>Hành Động</th>
                     </tr>
-                <tr>
-                  @foreach($order as $value)  
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $value->name }}</td>
-                  <td>{{ $value->phone }}</td>
-                  <td>{{ $value->addrest }}</td>
-                  <td>
-                    @foreach($value->orderDetail as $ads)
-                     <div style="display:flex;margin:3px;">
-                       <img src="{{url('images')}}/{{ $ads->image }}" style="width:40px;border-radius:3px" alt="">
-                       <p>
-                       <strong>{{$ads->product_name}} </strong><br/>
-                        Màu:{{$ads->color}}-Size:{{$ads->size}} <span style="color:#373ce3">x{{$ads->quantity}}</span>
-                       </p>
-
-                     </div>
-                    @endforeach  
-                  </td>
-                  <td>{{ number_format($value->total_price,0,".",".") }}đ</td>
-                  <td>{{ $value->note }}</td>
-                  <td>{{ $value->created_at }}</td>
-                  <td>
-                  @if($value->status == 1)
-                  <span class="label label-danger">Chưa xác nhận</span>
-                   @else
-                  <span class="label label-success">Đã xác nhận</span>
-                  @endif
-                  </td>
-                  
-                  <td>
-                    <form action="{{ route('order.update',$value->id) }}" method="post">
-                      @csrf
-                      @method('PUT')
-                      <input type="hidden" name="status" value="2">
-                      <button style="border:none;background: transparent;" type="submit" class="" title="Xác Nhận"><i style="color:#00a65a" class="fa fa-fw fa-check-circle"></i></button>
-                    </form>
-
-                  
-                  <form action="{{ route('order.destroy',$value->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <input type="hidden" name="status" value="2">
-                      <button style="border:none;background: transparent;" type="submit" onclick="return confirm('Bạn có muốn xóa đơn hàng này không?')" class="" title="Xóa"><i style="color:red" class="fa fa-fw fa-trash-o"></i></button>
-                    </form>
-                  </td>
-
-                </tr>
-                @endforeach 
-                
-              </tbody></table>
+                    @foreach($order as $value)  
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $value->name }}</td>
+                        <td>{{ $value->phone }}</td>
+                        <td>{{ $value->addrest }}</td>
+                        <td>
+                          @foreach($value->orderDetail as $item)
+                          <div style="display:flex;margin:3px;">
+                                <img src="{{url('images')}}/{{ $item->product->image }}" style="width:40px;border-radius:3px" alt="">
+                                <p>
+                                    <strong>{{$item->product->product_name}} </strong><br/>
+                                    Màu:{{$item->color}}-Size:{{$item->size}} 
+                                    <span style="color:#373ce3">x{{$item->quantity}}</span>
+                                </p>
+                          </div>
+                          @endforeach  
+                        </td>
+                        <td>{{ number_format($value->total_price,0,".",".") }}đ</td>
+                        <td>{{ $value->note }}</td>
+                        <td>{{ $value->created_at }}</td>
+                        <td>
+                        @if($value->status == 1)
+                        <span class="label label-danger">Chưa xác nhận</span>
+                        @else
+                        <span class="label label-success">Đã xác nhận</span>
+                        @endif
+                        </td>
+                        <td>
+                          <form action="{{ route('order.update',$value->id) }}" method="post">
+                              @csrf
+                              @method('PUT')
+                              <input type="hidden" name="status" value="2">
+                              <button style="border:none;background: transparent;" type="submit" class="" title="Xác Nhận"><i style="color:#00a65a" class="fa fa-fw fa-check-circle"></i></button>
+                          </form>
+                          <form action="{{ route('order.destroy',$value->id) }}" method="post">
+                              @csrf
+                              @method('DELETE')
+                              <input type="hidden" name="status" value="2">
+                              <button style="border:none;background: transparent;" type="submit" onclick="return confirm('Bạn có muốn xóa đơn hàng này không?')" class="" title="Xóa"><i style="color:red" class="fa fa-fw fa-trash-o"></i></button>
+                          </form>
+                        </td>
+                  </tr>
+                  @endforeach 
+              </tbody>
+            </table>
             </div>
             <!-- /.box-body -->
           </div>

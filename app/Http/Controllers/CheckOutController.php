@@ -5,28 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helper\Cart;
 use App\Http\Requests\AddOderRequest;
-use App\Models\Oder;
-use App\Models\OderDetail;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Session;
 use Mail;
 use App\Mail\NewOrder;
+use App\Jobs\NewJob;
 
 class CheckOutController extends Controller
 {
-    public function index(){
+    public function index() {
         $cart = new Cart();
         $totalPrice = $cart->getTotalPrice();
         $totalQuantity = $cart->getTotalQuantity();
         return view('checkout', compact('cart','totalPrice','totalQuantity'));
     }
 
-
-    public function AddOder(AddOderRequest $request){
+    public function AddOder(AddOderRequest $request) {
         $cart = new Cart();
         $totalPrice = $cart->getTotalPrice();
         $totalQuantity = $cart->getTotalQuantity();
 
-        $oder = Oder::create([
+        $order = Order::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'addrest' => $request->address,
@@ -37,11 +37,9 @@ class CheckOutController extends Controller
         ]);
 
         foreach($cart->getItems() as $value){
-            OderDetail::create([
+            OrderDetail::create([
                 'id_product' => $value['product_id'],
-                'product_name' => $value['product_name'],
-                'image' => $value['image'],
-                'oder_id' => $oder->id,
+                'id_order' => $order->id,
                 'quantity' => $value['quantity'],
                 'price' => $value['price'],
                 'color' => $value['color'],
@@ -49,17 +47,16 @@ class CheckOutController extends Controller
             ]);
         }
 
-
-        if($oder){
-            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewOrder($oder->id, $cart->getItems()));
+        if($order){
+            Mail::to('daovannghia1392001@gmail.com')->send(new NewOrder($order->id, $cart->getItems()));
+            // NewJob::dispatch($order->id, $cart->getItems())->delay(now()->addSeconds(20));
             Session::forget('cart');
+
             return redirect()->route('checkout.thanks');
         }
-        
     }
 
-    public function thanks(){
-
+    public function thanks() {
         return view('thanks');
     }
 }

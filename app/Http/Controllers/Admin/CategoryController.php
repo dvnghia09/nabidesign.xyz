@@ -10,19 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    public function index(){
+    public function index() {
         $category = Category::all();
         
         return view('admin.category.index', compact('category'));
     }
 
-    // view trang thêm mới category cha
-    public function add(){ 
+    public function add() { 
         return view('admin.category.add');
     }
 
-    // Phương thức thực hiện thêm mới sản phẩm
-    public function create(Request $req){
+    public function create(Request $req) {
         $req->validate([
             'name'=> ['required','unique:categories'],
             'status'=> ['required'],
@@ -38,16 +36,13 @@ class CategoryController extends Controller
         }
     }
 
-    // Trang sửa danh mục
-    public function edit($id){
+    public function edit($id) {
         $cate = Category::find($id);
         
         return view('admin.category.update',compact('cate'));
     }
 
-    // Phương thức sửa danh mục
-    public function update(Request $req,$id){
-        // validate
+    public function update(Request $req,$id) {
         $req->validate([
             'name'=> 'required|unique:categories,name,'.$id,
             'status'=> ['required'],
@@ -65,23 +60,13 @@ class CategoryController extends Controller
 
     }
 
-    // Phương thức xóa danh mục sản phẩm
-    public function delete($id){
-        
-        // Lấy ra id tất cả sản phẩm thuộc danh mục con
+    public function delete($id) {
         $idCate = DB::table('category_subs')->where('category_id', $id)->pluck('id')->toArray();
-        
-        // Xóa tất cả sản phẩm thuộc danh mục con của danh mục cha
         $delete = DB::table('products')->whereIn('category_id', $idCate)->delete();
-        
-        // Xóa tất cả danh mục con
         $categorySub = DB::table('category_subs')->where('category_id', $id)->delete();
-        
-        // Xóa danh mục cha
         $cate = Category::find($id);
         $cate->delete();
               
         return redirect()->route('category.index');
-        
     }
 }

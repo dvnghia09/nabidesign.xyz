@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOdersTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateOdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('oders', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_user')->nullable()->unsigned();
+            $table->unsignedBigInteger('id_user');
             $table->bigInteger('total_price');
             $table->tinyInteger('quantity');
             $table->string('addrest');
+            $table->string('name');
             $table->string('phone', 11);
             $table->string('note');
+            $table->tinyInteger('status')->default(true);
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate("cascade")->onDelete('cascade');
             $table->timestamps();
         });
     }

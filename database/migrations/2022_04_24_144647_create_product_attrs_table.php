@@ -15,8 +15,10 @@ class CreateProductAttrsTable extends Migration
     {
         Schema::create('product_attrs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_product')->unsigned();
-            $table->bigInteger('id_attr')->unsigned();
+            $table->unsignedBigInteger('id_product');
+            $table->unsignedBigInteger('id_attr');
+            $table->foreign('id_product')->references('id')->on('products')->onUpdate("cascade")->onDelete('cascade');
+            $table->foreign('id_attr')->references('id')->on('attr_products')->onUpdate("cascade")->onDelete('cascade');
             $table->timestamps();
         });
     }
