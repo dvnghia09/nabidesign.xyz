@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Oder;
-use App\Models\OderDetail;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
@@ -15,9 +15,8 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        
-        $order = Oder::all();
+    {
+        $order = Order::with('orderDetail.product')->get();
         return view('admin.order.index',compact('order'));
     }
 
@@ -72,9 +71,8 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-        
-        $order = Oder::find($id);
+    {
+        $order = Order::find($id);
         $order->update([
             'status' => $request->status
         ]);
@@ -90,9 +88,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {   
-        OderDetail::where('oder_id',$id)->delete();
-
-        $order = Oder::find($id);
+        OrderDetail::where('oder_id',$id)->delete();
+        $order = Order::find($id);
         $order->delete();
 
         return redirect()->route('order.index');

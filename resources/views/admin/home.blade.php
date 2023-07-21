@@ -61,7 +61,7 @@
 
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>{{ceil(((count($order)/$view)*100))}}<sup style="font-size: 20px">%</sup></h3>
+                        <h3>{{ count($order) && $view ? ceil(((count($order)/$view)*100)) : '' }}<sup style="font-size: 20px">%</sup></h3>
                         <p>Tỉ lệ chuyển đổi</p>
                     </div>
                     <div class="icon">

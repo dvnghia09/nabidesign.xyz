@@ -9,7 +9,7 @@ use App\Helper\Cart;
 
 class CartController extends Controller
 {
-    public function showCart(){
+    public function showCart() {
         $category = Category::all()->sortByDesc("id");
         $cart = new Cart();
         $totalPrice = $cart->getTotalPrice();
@@ -17,8 +17,7 @@ class CartController extends Controller
         return view('cart', compact('category','cart','totalPrice','totalQuantity'));
     }
 
-    public function add(Request $req){
-        
+    public function add(Request $req) {
         $req->validate([
             'color'=> ['required'],
             'size'=> ['required'],
@@ -34,7 +33,7 @@ class CartController extends Controller
         return redirect()->route('showCart.user');
     }
 
-    public function update(Request $req){
+    public function update(Request $req) {
         $id = ($req->id);
 
         $cart = new Cart();
@@ -42,7 +41,7 @@ class CartController extends Controller
         return redirect()->route('showCart.user');
     }
 
-    public function delete($id){
+    public function delete($id) {
         $cart = new Cart();
         $cart->delete($id);
         return redirect()->route('showCart.user');

@@ -15,8 +15,8 @@ class CreateAttrProductsTable extends Migration
     {
         Schema::create('attr_products', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('value', 255);
+            $table->string('name');
+            $table->string('value');
             $table->timestamps();
         });
     }

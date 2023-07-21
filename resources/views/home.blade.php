@@ -3,22 +3,13 @@
             <!-- slider -->
              <div class="slide">
                   <div class="slide-move">
-                         <div class="slide-move__item active">
-                             <a href="{{$sliderOne->link}}" target="_blank" class="slide-move__item-link">
-                                <img class="slide-move__item-img" src="{{url('images')}}/{{$sliderOne->image}}"alt="">
-                             </a>
+                    @foreach ($slider as $value)
+                         <div class="slide-move__item {{ $loop->first ? 'active' : '' }}">
+                            <a href="{{ $value->link}}" target="_blank" class="slide-move__item-link">
+                                <img class="slide-move__item-img" src="{{ url('images') }}/{{ $value->image }}">
+                            </a>
                          </div>
-                         <div class="slide-move__item">
-                            <a href="{{$sliderTwo->link}}" target="_blank" class="slide-move__item-link">
-                                <img class="slide-move__item-img" src="{{url('images')}}/{{$sliderTwo->image}}"alt="">
-                            </a>
-                        </div>
-                        <div class="slide-move__item">
-                            <a href="{{$sliderThree->link}}" target="_blank" class="slide-move__item-link">
-                                <img class="slide-move__item-img" src="{{url('images')}}/{{$sliderThree->image}}"alt="">
-                            </a>
-                        </div>
-                       
+                    @endforeach 
                   </div>
                   <div class="slide-next">
                       <span class="slide-up"><i class="ti-angle-right"></i></span>
@@ -126,14 +117,13 @@
                            <h3 class="product-heading__subtitle">Hot Item</h3>
                         </div>
                         <div class="row">
-                            <!-- img top bán CHẠY -->
-                            <div class="col l-6 m-12 c-12">                               
-                                <a class="hot-item" href="{{ $proHot->link }}">
-                                    <img class="hot-item-img" src="{{url('images')}}/{{$proHot->image}}" alt="">
-                               </a>                               
+                            <div class="col l-6 m-12 c-12">
+                                @if ($proHot)                             
+                                    <a class="hot-item" href="{{ $proHot->link }}">
+                                        <img class="hot-item-img" src="{{url('images')}}/{{ $proHot->image }}" alt="">
+                                    </a>
+                               @endif                              
                             </div>
-
-
                             <div class="col l-6 m-12 c-12">
                                 <div class="row ">
                                    

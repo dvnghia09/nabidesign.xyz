@@ -15,22 +15,21 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index() {
         
         $product = Product::all();
         return view('admin.product.index', compact('product'));
     }
 
-    public function add(){
+    public function add() {
         $attrColor = AttrProduct::where('name','color')->get();
         $attrSize = AttrProduct::where('name','size')->get();
         $categorysub = CategorySub::all();
         return view('admin.product.add',compact('categorysub','attrColor','attrSize'));
     }
 
-    public function create(AddProductRequest $req){ 
-        // Up 1 ảnh
-        if($req->hasFile('file')){
+    public function create(AddProductRequest $req) { 
+        if($req->hasFile('file')) {
             $imgFile = $req->file('file')->getClientOriginalName();
             $imageName = time().'_'.$imgFile;
             $req->file->move(public_path('images'), $imageName);
@@ -39,10 +38,8 @@ class ProductController extends Controller
         $req->merge(['image' => $imageName ]);
         $product = Product::create($req->all());
 
-        // Up nhiều ảnh
         $files = [];
-        if ($req->hasFile('files')){
-            
+        if ($req->hasFile('files')) {
             foreach($req->file('files') as $key => $file)
             {   
                 $fileName = time().'_'.$file->getClientOriginalName();  
@@ -59,27 +56,22 @@ class ProductController extends Controller
         }
 
         $attr = $req->attr;
-        if(!empty($attr)){
-            foreach($attr as $value){
-             
+        if(!empty($attr)) {
+            foreach($attr as $value) {
                 ProductAttr::create([
                     'id_attr' => $value,
                     'id_product' => $product->id,
                 ]);
-            
             }
         }
 
-        if($product){
+        if($product) {
             return redirect()->route('product.index')->with('message','Thêm mới sản phẩm "'.$req->name.'" thành công');
         }
     }
 
-    public function edit($id){
+    public function edit($id) {
         $attr = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
-
-
-
         $attrColor = AttrProduct::where('name','color')->get();
         $attrSize = AttrProduct::where('name','size')->get();
         $product = Product::find($id);
@@ -88,44 +80,33 @@ class ProductController extends Controller
         return view('admin.product.update', compact('categorysub','product','imageProduct','attrColor','attrSize','attr'));
     }
 
-    public function update(UpdateProductRequest $request ,$id){
-        
-        // insert các thuộc tính vào
+    public function update(UpdateProductRequest $request ,$id) {
         $attr = $request->attr;
-        if(!empty($attr)){
-            // Xóa thuộc tính sản phẩm trước
+        if(!empty($attr)) {
             ProductAttr::where('id_product', $id)->delete();   
-        foreach($attr as $value){
-         
-            ProductAttr::create([
-                'id_attr' => $value,
-                'id_product' => $id,
-            ]);
-        
+            foreach($attr as $value) {
+                ProductAttr::create([
+                    'id_attr' => $value,
+                    'id_product' => $id,
+                ]);
             }
         }
 
         $product = Product::find($id);
-        
-        // Update 1 ảnh
-            if($request->hasFile('file')){
-            // Xóa ảnh cũ
+        if($request->hasFile('file')) {
             File::delete('images/'.$product->image); 
-
             $imageName = time().'_'.$request->file('file')->getClientOriginalName();
             $request->file->move(public_path('images'),$imageName);
-        }else{
+        } else {
             $imageName = $product->image;
         }
 
-        // Nhiều ảnh
         $files = [];
-        if ($request->hasFile('files')){
+        if ($request->hasFile('files')) {
             $imageOld = ImageProduct::where('product_id',$id)->get();
-            foreach($imageOld as $value){
+            foreach($imageOld as $value) {
                 File::delete('images/'.$value->images);
             }
-
             $deleteImages = ImageProduct::where('product_id',$id)->delete();
             
             foreach($request->file('files') as $key => $file)
@@ -154,26 +135,18 @@ class ProductController extends Controller
             'status' => $request->status,
         ]);
 
-        
         return redirect()->route('product.index')->with('message','Sửa sản phẩm thành công');
-        
-
     }
 
     public function delete($id){
-        // Xóa ảnh trong file khi xóa sản phẩm
         $imageOld = ImageProduct::where('product_id',$id)->get();
         foreach($imageOld as $value){
             File::delete('images/'.$value->images);
         }
-
         ImageProduct::where('product_id', $id)->delete();
         $product = Product::find($id);
-
-
         $product->delete();
 
         return redirect()->route('product.index')->with('message','Xóa thành công');
-        
     }
 }

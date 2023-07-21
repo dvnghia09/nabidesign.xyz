@@ -17,8 +17,8 @@ class CreateCategorySubsTable extends Migration
             $table->id();
             $table->string('name',200)->unique();
             $table->tinyInteger('status')->default(1);
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

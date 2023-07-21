@@ -75,15 +75,11 @@ class LookBookController extends Controller
     public function update(LookBookRequest $request, $id)
     {
         $lookBook = LookBook::find($id);
-        
-        // Update  ảnh
             if($request->hasFile('file')){
-            // Xóa ảnh cũ
             File::delete('images/'.$lookBook->image); 
-
             $imageName = time().'_'.$request->file('file')->getClientOriginalName();
             $request->file->move(public_path('images'),$imageName);
-        }else{
+        } else {
             $imageName = $lookBook->image;
         }
 

@@ -45,7 +45,7 @@ class CategorySubController extends Controller
         // dd($request->all());
         $categorySub = CategorySub::create($request->all());
 
-        if($categorySub){
+        if($categorySub) {
             return redirect()->route('category-sub.index');
         }
     }
@@ -88,11 +88,10 @@ class CategorySubController extends Controller
             'name'=> $request->name,
             'status'=> $request->status
         ]);
-        if($update){
+
+        if($update) {
             return redirect()->route('category-sub.index');
         }
-        
-
     }
 
     /**

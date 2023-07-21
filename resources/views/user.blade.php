@@ -56,12 +56,12 @@
                   @foreach($order as $value)  
                   <td>{{ $value->id }}</td>
                   <td>
-                    @foreach($value->orderDetail as $ads)
+                    @foreach($value->orderDetail as $item)
                      <div style="display:flex;margin:3px;">
-                       <img src="{{url('images')}}/{{ $ads->image }}" style="width:40px;border-radius:3px" alt="">
+                       <img src="{{ url('images')}}/{{ $item->product->image }}" style="width:40px;border-radius:3px" alt="">
                        <p>
-                       <strong>{{$ads->product_name}} </strong><br/>
-                        Màu:{{$ads->color}}-Size:{{$ads->size}} <span style="color:#373ce3">x{{$ads->quantity}}</span>
+                       <strong>{{$item->product_name}} </strong><br/>
+                        Màu:{{ $item->color }}-Size:{{ $item->size }} <span style="color:#373ce3">x{{ $item->quantity }}</span>
                        </p>
 
                      </div>
