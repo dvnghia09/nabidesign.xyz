@@ -70,6 +70,8 @@ class AccountController extends Controller
         return redirect()->route('user');
     }
 
-
+/** test cherry-pick code ở commit khác
+ * @var 
+ * */
     
 }
