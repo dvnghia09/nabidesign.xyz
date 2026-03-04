@@ -15,9 +15,8 @@ class AttrController extends Controller
      */
     public function index()
     {   
-        $attrColor = AttrProduct::where('name','color')->get();
-        $attrSize = AttrProduct::where('name','size')->get();
-        return view('admin.attr.index', compact('attrColor','attrSize'));
+        $attributes = AttrProduct::all()->groupBy('name');
+        return view('admin.attr.index', compact('attributes'));
     }
 
     /**
@@ -27,7 +26,8 @@ class AttrController extends Controller
      */
     public function create()
     {
-        return view('admin.attr.add');
+        $names = AttrProduct::distinct()->pluck('name');
+        return view('admin.attr.add', compact('names'));
     }
 
     

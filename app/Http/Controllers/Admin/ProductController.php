@@ -22,27 +22,29 @@ class ProductController extends Controller
     }
 
     public function add() {
-        $attrColor = AttrProduct::where('name','color')->get();
-        $attrSize = AttrProduct::where('name','size')->get();
+        $attributes = AttrProduct::all()->groupBy('name');
         $categorysub = CategorySub::all();
-        return view('admin.product.add',compact('categorysub','attrColor','attrSize'));
+        return view('admin.product.add',compact('categorysub','attributes'));
     }
 
     public function create(AddProductRequest $req) { 
         if($req->hasFile('file')) {
             $imgFile = $req->file('file')->getClientOriginalName();
-            $imageName = time().'_'.$imgFile;
+            $imageName = time().'_'.uniqid().'_'.$imgFile;
             $req->file->move(public_path('images'), $imageName);
         }
         
-        $req->merge(['image' => $imageName ]);
-        $product = Product::create($req->all());
+        $data = $req->all();
+        $data['image'] = $imageName ?? '';
+        $data['price'] = $data['price'] ?? 0;
+        $data['sale_price'] = $data['sale_price'] ?? 0;
+        $product = Product::create($data);
 
         $files = [];
         if ($req->hasFile('files')) {
             foreach($req->file('files') as $key => $file)
             {   
-                $fileName = time().'_'.$file->getClientOriginalName();  
+                $fileName = time().'_'.uniqid().'_'.$file->getClientOriginalName();  
                 $file->move(public_path('images'), $fileName);
                 $files[]['images'] = $fileName;
             }
@@ -55,6 +57,7 @@ class ProductController extends Controller
             ]);
         }
 
+        // Xử lý thuộc tính động (Checkbox IDs)
         $attr = $req->attr;
         if(!empty($attr)) {
             foreach($attr as $value) {
@@ -65,37 +68,84 @@ class ProductController extends Controller
             }
         }
 
+        // Xử lý thuộc tính nhập tay (Names & Values)
+        $attr_values = $req->attr_values;
+        if(!empty($attr_values)) {
+            foreach ($attr_values as $name => $valString) {
+                if (!$valString) continue;
+                $vals = explode(',', $valString);
+                foreach ($vals as $v) {
+                    $v = trim($v);
+                    if ($v) {
+                        $attrObj = AttrProduct::firstOrCreate(['name' => $name, 'value' => $v]);
+                        ProductAttr::firstOrCreate([
+                            'id_attr' => $attrObj->id,
+                            'id_product' => $product->id,
+                        ]);
+                    }
+                }
+            }
+        }
+
         if($product) {
             return redirect()->route('product.index')->with('message','Thêm mới sản phẩm "'.$req->name.'" thành công');
         }
     }
 
     public function edit($id) {
-        $attr = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
-        $attrColor = AttrProduct::where('name','color')->get();
-        $attrSize = AttrProduct::where('name','size')->get();
+        $attrIds = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
+        $attributes = AttrProduct::all()->groupBy('name');
+        
+        // Group selected attribute values for display in text inputs
+        $selectedAttrs = AttrProduct::whereIn('id', $attrIds)->get()->mapToGroups(function ($item, $key) {
+            return [$item->name => $item->value];
+        })->map(function ($item) {
+            return $item->implode(', ');
+        })->toArray();
+
         $product = Product::find($id);
         $imageProduct = ImageProduct::where('product_id',$id)->pluck('images')->toArray();
         $categorysub = CategorySub::all();
-        return view('admin.product.update', compact('categorysub','product','imageProduct','attrColor','attrSize','attr'));
+        return view('admin.product.update', compact('categorysub','product','imageProduct','attributes','attrIds', 'selectedAttrs'));
     }
 
     public function update(UpdateProductRequest $request ,$id) {
-        $attr = $request->attr;
-        if(!empty($attr)) {
-            ProductAttr::where('id_product', $id)->delete();   
-            foreach($attr as $value) {
+        ProductAttr::where('id_product', $id)->delete();   
+        
+        // Xử lý thuộc tính động (Checkbox IDs)
+        $attrIDs = $request->attr;
+        if(!empty($attrIDs)) {
+            foreach($attrIDs as $id_attr) {
                 ProductAttr::create([
-                    'id_attr' => $value,
+                    'id_attr' => $id_attr,
                     'id_product' => $id,
                 ]);
+            }
+        }
+
+        // Xử lý thuộc tính nhập tay (Names & Values)
+        $attr_values = $request->attr_values;
+        if(!empty($attr_values)) {
+            foreach ($attr_values as $name => $valString) {
+                if (!$valString) continue;
+                $vals = explode(',', $valString);
+                foreach ($vals as $v) {
+                    $v = trim($v);
+                    if ($v) {
+                        $attrObj = AttrProduct::firstOrCreate(['name' => $name, 'value' => $v]);
+                        ProductAttr::firstOrCreate([
+                            'id_attr' => $attrObj->id,
+                            'id_product' => $id,
+                        ]);
+                    }
+                }
             }
         }
 
         $product = Product::find($id);
         if($request->hasFile('file')) {
             File::delete('images/'.$product->image); 
-            $imageName = time().'_'.$request->file('file')->getClientOriginalName();
+            $imageName = time().'_'.uniqid().'_'.$request->file('file')->getClientOriginalName();
             $request->file->move(public_path('images'),$imageName);
         } else {
             $imageName = $product->image;
@@ -111,7 +161,7 @@ class ProductController extends Controller
             
             foreach($request->file('files') as $key => $file)
             {   
-                $fileName = time().'_'.$file->getClientOriginalName();  
+                $fileName = time().'_'.uniqid().'_'.$file->getClientOriginalName();  
                 $file->move(public_path('images'), $fileName);
                 $files[]['images'] = $fileName;
             }
@@ -127,8 +177,8 @@ class ProductController extends Controller
         $product->update([
             'name' => $request->name,
             'quantity' => $request->quantity,
-            'price' => $request->price,
-            'sale_price' => $request->sale_price,
+            'price' => $request->price ?? 0,
+            'sale_price' => $request->sale_price ?? 0,
             'category_id' => $request->category_id,
             'image' => $imageName,
             'description' => $request->description,

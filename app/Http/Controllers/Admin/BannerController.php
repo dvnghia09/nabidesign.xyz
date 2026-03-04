@@ -28,7 +28,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.banner.create');
     }
 
     /**
@@ -37,9 +37,21 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BannerRequest $request)
     {
-        //
+        $imageName = '';
+        if($request->hasFile('file')){
+            $imageName = time().'_'.uniqid().'_'.$request->file('file')->getClientOriginalName();
+            $request->file->move(public_path('images'),$imageName);
+        }
+
+        Banner::create([
+            'name' => $request->name,
+            'link' => $request->link,
+            'image' => $imageName,
+        ]);
+
+        return redirect()->route('banner.index')->with('message','Thêm banner thành công');
     }
 
     /**
@@ -81,7 +93,7 @@ class BannerController extends Controller
         // Xóa ảnh cũ
         File::delete('images/'.$lookBook->image); 
 
-        $imageName = time().'_'.$request->file('file')->getClientOriginalName();
+        $imageName = time().'_'.uniqid().'_'.$request->file('file')->getClientOriginalName();
         $request->file->move(public_path('images'),$imageName);
         }else{
             $imageName = $banner->image;
@@ -104,6 +116,11 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $banner = Banner::find($id);
+        if ($banner) {
+            File::delete(public_path('images/'.$banner->image));
+            $banner->delete();
+        }
+        return redirect()->route('banner.index')->with('message','Xóa banner thành công');
     }
 }

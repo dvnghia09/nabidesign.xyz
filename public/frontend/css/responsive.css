@@ -142,3 +142,193 @@
     }
 
 }
+/* Contact and Warranty Responsive */
+@media (max-width: 1023px) {
+    .contact-container,
+    .warranty-container {
+        padding: 30px 10px;
+    }
+
+    .contact-heading {
+        font-size: 2.4rem;
+    }
+
+    .contact-info-title,
+    .contact-form-title {
+        font-size: 1.8rem;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 739px) {
+    .warranty-content {
+        padding: 20px 15px;
+    }
+
+    .contact-map iframe {
+        height: 250px;
+    }
+
+    .contact-form-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+/* Centering fix for Mobile */
+@media (max-width: 739px) {
+    .contact-container,
+    .warranty-container {
+        padding: 20px 0;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .contact-container .row,
+    .warranty-container .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .contact-container .col,
+    .warranty-container .col {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .contact-heading {
+        padding: 0 10px;
+    }
+}
+
+/* Final alignment for small devices */
+@media (max-width: 739px) {
+    .grid.wide {
+        width: 100% !important;
+        padding: 0 5px; /* Tiny gutter for the grid edge */
+    }
+    
+    .contact-container .row,
+    .warranty-container .row {
+        width: 100%;
+        margin: 0 !important;
+    }
+    
+    .contact-container .col,
+    .warranty-container .col {
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+    
+    .contact-heading {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+/* Overwrite previous mobile alignment attempts with a cleaner solution */
+@media (max-width: 739px) {
+    .contact-container,
+    .warranty-container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+
+    .contact-container .row,
+    .warranty-container .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .contact-container .col,
+    .warranty-container .col {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+    }
+
+    .contact-heading {
+        font-size: 2.2rem !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 20px 0 !important;
+        position: relative;
+        left: 0;
+    }
+    
+    .contact-info-title, 
+    .contact-form-title {
+        text-align: center !important;
+    }
+}
+
+/* Absolute Centering Fix for Mobile */
+@media (max-width: 739px) {
+    .contact-container, 
+    .warranty-container {
+        width: 100% !important;
+        padding: 20px 15px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .contact-container .row, 
+    .warranty-container .row {
+        margin: 0 !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    .contact-container .col, 
+    .warranty-container .col {
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 20px !important;
+    }
+
+    .contact-heading {
+        font-size: 2.2rem !important;
+        text-align: center !important;
+        margin: 10px 0 20px 0 !important;
+        width: 100% !important;
+    }
+    
+    .contact-info-title, 
+    .contact-form-title {
+        text-align: center !important;
+        font-size: 1.8rem !important;
+    }
+
+    .contact-map iframe {
+        width: 100% !important;
+        border-radius: 8px !important;
+    }
+
+    .warranty-content {
+        padding: 20px 10px !important;
+        font-size: 1.4rem !important;
+        text-align: justify !important;
+    }
+}
+
+/* Fix padding for tablets and small laptops (1024px - 1239px) */
+@media (min-width: 1024px) and (max-width: 1239px) {
+    .contact-container,
+    .warranty-container {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+        width: 100% !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* Ensure container doesn't overflow */
+.app__container {
+    overflow-x: hidden;
+    width: 100%;
+}

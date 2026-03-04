@@ -33,10 +33,14 @@ class AppServiceProvider extends ServiceProvider
 
             $cateSub = CategorySub::all();
 
+            // Lấy tất cả cài đặt
+            $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+
             $view->with([
                 'totalQuantity'=>$totalQuantity,
                 'category'     => $category,
                 'cateSub'      =>  $cateSub,
+                'settings'     => $settings,
              ]);
         });
     }

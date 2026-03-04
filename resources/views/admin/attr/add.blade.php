@@ -20,9 +20,17 @@
                         @csrf
                       <div class="box-body " >
                           <div class="form-group">
-                            <label for="example1">Màu sản phảm</label>
-                            <input type="hidden" name="name" value="color">
-                            <input  type="text" name="value" class="form-control @error('value') is-invalid @enderror" id="example1" >
+                            <label>Tên thuộc tính (Ví dụ: Color, Size, Dòng máy...)</label>
+                            <input type="text" list="existing-names" name="name" class="form-control" placeholder="Chọn hoặc nhập tên mới" required>
+                            <datalist id="existing-names">
+                                @foreach($names as $n)
+                                    <option value="{{ $n }}">
+                                @endforeach
+                            </datalist>
+                          </div>
+                          <div class="form-group">
+                            <label for="example1">Giá trị thuộc tính</label>
+                            <input  type="text" name="value" class="form-control @error('value') is-invalid @enderror" id="example1" placeholder="Ví dụ: Red, L..." required>
                             @error('value')
                                 <span class="message-err" style="color:red;">{{ $message }}</span>
                             @enderror                              

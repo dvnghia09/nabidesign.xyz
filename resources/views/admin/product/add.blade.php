@@ -39,40 +39,28 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <label for="example3">Giá sản phẩm</label>
+                  <label for="example3">Giá sản phẩm (Để trống nếu muốn hiển thị nút Liên hệ)</label>
                   <input type="text" value="{{old('price')}}" name="price" class="form-control @error('price') is-invalid @enderror" id="example3" placeholder="Nhập giá sản phẩm">
                     @error('price')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
-                  <label for="example4">Giá sale</label>
-                  <input type="text" value="{{old('sale_price')}}" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" id="example4" placeholder="Nhập khuyến mãi">
-                    @error('sale_price')
-                        <span class="message-err" style="color:red;">{{ $message }}</span>
-                    @enderror
-                </div>
 
-                <div class="checkbox">
-                  <p>
-                    <strong >Màu sắc :</strong>
-                  </p>
-                @foreach($attrColor as $value)
-                  <label>
-                  <input value="{{$value->id}}" name="attr[]" type="checkbox"> {{ $value->value }}
-                  </label>
+                <div class="row">
+                  @foreach($attributes as $name => $values)
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label style="text-transform: uppercase;">{{ $name }}</label>
+                      <input type="text" name="attr_values[{{ $name }}]" value="{{ old('attr_values.'.$name) }}" class="form-control" list="list-{{ $loop->index }}" placeholder="Nhập {{ $name }}...">
+                      <datalist id="list-{{ $loop->index }}">
+                        @foreach($values as $value)
+                          <option value="{{ $value->value }}">
+                        @endforeach
+                      </datalist>
+                      <p class="help-block"><small>Bạn có thể nhập nhiều giá trị cách nhau bằng dấu phẩy (,)</small></p>
+                    </div>
+                  </div>
                   @endforeach
-                  
-                </div>
-
-                <div class="checkbox">
-                  <p><strong >Size :</strong></p> 
-                @foreach($attrSize as $value)
-                  <label>
-                  <input value="{{$value->id}}" name="attr[]" type="checkbox"> {{ $value->value }}
-                  </label> 
-                  @endforeach
-                   
                 </div>
 
                 
@@ -81,7 +69,7 @@
                   <label for="">Danh mục sản phẩm</label>
                   <select class="form-control" name="category_id">
                     @foreach($categorysub as $value)
-                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                    <option value="{{ $value->id }}" {{ old('category_id') == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -128,11 +116,11 @@
                   <label for="input">Chọn trạng thái</label>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="status" id="input" value="1" checked="checked">
+                      <input type="radio" name="status" id="input" value="1" {{ old('status', '1') == '1' ? 'checked' : '' }}>
                       Hiện
                     </label>
                     <label>
-                      <input type="radio" name="status" id="input" value="0">
+                      <input type="radio" name="status" id="input" value="0" {{ old('status') == '0' ? 'checked' : '' }}>
                       Ẩn
                     </label>
                   </div>

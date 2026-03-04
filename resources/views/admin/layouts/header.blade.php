@@ -4,7 +4,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Nabi Admin</span>
+      <span class="logo-lg">{{ $settings['brand_name'] ?? 'Nabi' }} Admin</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -104,7 +104,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ url('assest') }}/images/avt1.jpg" class="user-image" alt="User Image">
+              <i class="fa fa-user"></i>
               <span class="hidden-xs">Tài Khoản Admin</span>
             </a>
             <ul class="dropdown-menu">

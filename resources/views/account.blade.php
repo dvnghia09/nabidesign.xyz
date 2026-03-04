@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url('frontend') }}/css/account.css">
     <link rel="stylesheet" href="{{ url('frontend') }}/font/fontawesome-free-5.15.3-web/fontawesome-free-5.15.3-web/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Nabi Design</title>
+    <title>{{ $settings['brand_name'] ?? 'Nabi' }}</title>
 </head>
 <body>
     <!-- Nếu đăng nhập thì hiển thị ra tên email -->
@@ -22,7 +22,7 @@
     @endif -->
 
     <div class="header">
-        <a href="{{ route('home') }}" class="logo">Nabi</a>
+        <a href="{{ route('home') }}" class="logo">{{ $settings['brand_name'] ?? 'Nabi' }}</a>
         <a href="{{ route('home') }}" class="exit">Trở lại</a>   
     </div>
 

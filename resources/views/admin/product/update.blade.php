@@ -27,58 +27,50 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="example1">Tên sản phẩm</label>
-                  <input type="text" value="{{ $product->name }}" name="name" class="form-control @error('name') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
+                  <input type="text" value="{{ old('name', $product->name) }}" name="name" class="form-control @error('name') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
                     @error('name')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
                   <label for="example2">Số lượng</label>
-                  <input type="number" value="{{ $product->quantity }}" name="quantity" class="form-control @error('quantity') is-invalid @enderror" id="example2" placeholder="Nhập số lượng sản phẩm">
+                  <input type="number" value="{{ old('quantity', $product->quantity) }}" name="quantity" class="form-control @error('quantity') is-invalid @enderror" id="example2" placeholder="Nhập số lượng sản phẩm">
                     @error('quantity')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                  <label for="example3">Giá sản phẩm</label>
-                  <input type="text" value="{{ $product->price }}" name="price" class="form-control @error('price') is-invalid @enderror" id="example3" placeholder="Nhập giá sản phẩm">
+                  <label for="example3">Giá sản phẩm (Để trống nếu muốn hiển thị nút Liên hệ)</label>
+                  <input type="text" value="{{ old('price', $product->price) }}" name="price" class="form-control @error('price') is-invalid @enderror" id="example3" placeholder="Nhập giá sản phẩm">
                     @error('price')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group">
-                  <label for="example4">Giá sale</label>
-                  <input type="text" min="0" value="{{ $product->sale_price }}" name="sale_price" class="form-control @error('sale_price') is-invalid @enderror" id="example4" placeholder="Nhập khuyến mãi">
-                    @error('sale_price')
-                        <span class="message-err" style="color:red;">{{ $message }}</span>
-                    @enderror
-                </div>
 
-                <div class="checkbox">
-                  <p>
-                    <strong >Màu sắc :</strong>
-                  </p>
-                @foreach($attrColor as $value)
-                  <label>
-                  <input value="{{$value->id}}" name="attr[]" type="checkbox" {{ in_array($value->id,$attr) ? "checked" : "" }}> {{ $value->value }}
-                  </label>
-                @endforeach
-                </div>
-
-                <div class="checkbox">
-                  <p><strong >Size :</strong></p> 
-                @foreach($attrSize as $value)
-                  <label>
-                  <input value="{{$value->id}}" name="attr[]" type="checkbox" {{ in_array($value->id,$attr) ? "checked" : "" }}> {{ $value->value }}
-                  </label>  
-                @endforeach
+                <div class="row">
+                  @foreach($attributes as $name => $values)
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label style="text-transform: uppercase;">{{ $name }}</label>
+                      <input type="text" name="attr_values[{{ $name }}]" 
+                             value="{{ old('attr_values.'.$name, $selectedAttrs[$name] ?? '') }}"
+                             class="form-control" list="list-{{ $loop->index }}" placeholder="Nhập {{ $name }}...">
+                      <datalist id="list-{{ $loop->index }}">
+                        @foreach($values as $value)
+                          <option value="{{ $value->value }}">
+                        @endforeach
+                      </datalist>
+                      <p class="help-block"><small>Bạn có thể nhập nhiều giá trị cách nhau bằng dấu phẩy (,)</small></p>
+                    </div>
+                  </div>
+                  @endforeach
                 </div>
 
                 <div class="form-group">
                   <label for="">Danh mục sản phẩm</label>
                   <select class="form-control" name="category_id">
                     @foreach($categorysub as $value)
-                    <option  value="{{ $value->id }}" {{ $product->category_id == $value->id ? 'selected' : '' }} >{{ $value->name }}</option>
+                    <option  value="{{ $value->id }}" {{ old('category_id', $product->category_id) == $value->id ? 'selected' : '' }} >{{ $value->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -123,7 +115,7 @@
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Mô tả</label>
-                  <textarea  name="description" id="content" >{{ $product->description }}</textarea>
+                  <textarea  name="description" id="content" >{{ old('description', $product->description) }}</textarea>
                         
                 </div>
 
@@ -131,11 +123,11 @@
                   <label for="exampleInputEmail1">Chọn trạng thái</label>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="status" id="input" value="1" {{ $product->status == 1 ? 'checked' : '' }}>
+                      <input type="radio" name="status" id="input" value="1" {{ old('status', $product->status) == 1 ? 'checked' : '' }}>
                       Hiện
                     </label>
                     <label>
-                      <input type="radio" name="status" id="input" value="0" {{ $product->status == 0 ? 'checked' : '' }}>
+                      <input type="radio" name="status" id="input" value="0" {{ old('status', $product->status) == 0 ? 'checked' : '' }}>
                       Ẩn
                     </label>
                   </div>

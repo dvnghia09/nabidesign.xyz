@@ -1,6 +1,6 @@
 .header{
     height: var(--header-height);
-    background-color: #ffffff66;
+    background-color: #fff;
     position: fixed;
     top: 0;
     display: flex;
@@ -10,6 +10,10 @@
     padding: 0 40px;
     width: 100%;
  }
+
+.app__container {
+    margin-top: var(--header-height);
+}
  
  .header:hover{
      background-color:var(--White-color);
@@ -277,6 +281,7 @@
  .header-right{
      display: flex;
      align-items: center;
+     min-width: max-content;
  }
  
  .header-search{
@@ -322,7 +327,7 @@
      display: flex;
      font-size: 1.6rem;
      margin-left: 20px;
-     width: 84px;
+     /* width: 84px; */
      justify-content: flex-end;
  }
  
@@ -1138,7 +1143,7 @@ font-size: 1.5rem;}
     width: auto;
     margin-top: -22px;
     padding: 16px;
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
@@ -1152,7 +1157,7 @@ font-size: 1.5rem;}
   }
  /* hiệu ứng thay đổi background khi hover vào nút mũi tên*/
   .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(160, 157, 157, 0.8);
   }
  /* Thiết lập style cho nội dung của mỗi phần tử slideshow */
  .text {
@@ -1228,7 +1233,248 @@ font-size: 1.5rem;}
     color: #8f8c8c;
 }
 
+/* ===== HEADER CALL BUTTON ===== */
 
+.header-call {
+    display: flex;
+    align-items: center;
+}
 
+/* Nút gọi */
+.call-btn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
 
- 
+    background: #030303;
+    color: #fff;
+
+    padding: 6px 20px;
+    border-radius: 30px;
+
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+
+    transition: all 0.2s ease;
+}
+
+/* Hover */
+.call-btn:hover {
+    background: #757474;
+    transform: scale(1.05);
+}
+
+/* Icon */
+.call-icon {
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* Text */
+.call-text {
+    white-space: nowrap;
+}
+
+/* Số điện thoại */
+.call-number {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* ===== ANIMATION LẮC ===== */
+
+@keyframes phone-shake {
+    0%   { transform: rotate(0); }
+    5%   { transform: rotate(8deg); }
+    10%  { transform: rotate(-8deg); }
+    15%  { transform: rotate(6deg); }
+    20%  { transform: rotate(-6deg); }
+    25%  { transform: rotate(4deg); }
+    30%  { transform: rotate(-4deg); }
+    35%  { transform: rotate(2deg); }
+    40%  { transform: rotate(-2deg); }
+    45%  { transform: rotate(0); }
+    100% { transform: rotate(0); }
+}
+
+/* Chỉ rung icon */
+.call-icon {
+    animation: phone-shake 1.8s infinite;
+    transform-origin: center;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+    /* Ẩn chữ + số */
+    .call-text,
+    .call-number {
+        display: none;
+    }
+
+    /* Nút tròn */
+    .call-btn {
+        padding: 8px 10px;
+        border-radius: 50%;
+        font-size: 18px;
+    }
+
+    .call-icon {
+        font-size: 20px;
+    }
+}
+
+/* Contact Page Styles */
+.contact-container {
+    padding: 50px 0;
+}
+
+.contact-heading {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.contact-info-title,
+.contact-form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.contact-info-item {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.contact-info-item strong {
+    font-weight: 700;
+}
+
+.contact-map {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.contact-form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form-input,
+.contact-form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.contact-form-input:focus,
+.contact-form-textarea:focus {
+    border-color: var(--Black-color);
+}
+
+.contact-form-btn {
+    background: var(--Black-color);
+    color: var(--White-color);
+    border: none;
+    padding: 12px 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.4rem;
+    transition: opacity 0.3s;
+}
+
+.contact-form-btn:hover {
+    opacity: 0.8;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+/* Warranty Policy Styles */
+.warranty-container {
+    padding: 50px 0;
+}
+
+.warranty-content {
+    background: var(--White-color);
+    padding: 40px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    line-height: 1.8;
+    font-size: 1.5rem;
+    border-radius: 8px;
+}
+
+.warranty-content h1, 
+.warranty-content h2, 
+.warranty-content h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.contact-map iframe {
+    border: 0;
+}
+
+.warranty-empty {
+    text-align: center; 
+    color: #666;
+    font-size: 1.4rem;
+}
+
+.call-btn-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Base Layout Fix */
+.app__container {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Mobile Menu Toggle Styles */
+.nav-mobile-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d5d4d4;
+}
+
+.nav-mobile-item__link.has-child {
+    border-bottom: none !important;
+}
+
+.nav-mobile-toggle {
+    font-size: 1.4rem;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border-left: 1px solid #eee;
+}
+
+.nav-mobile-toggle.deg {
+    transform: rotate(180deg);
+}
+
+.nav-mobile__child.active {
+    display: block !important;
+}

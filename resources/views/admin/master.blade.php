@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Nabi Admin</title>
+  <title>{{ $settings['brand_name'] ?? 'Nabi' }} Admin</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="shortcut icon" type="image/png" href="{{ url('frontend') }}/img/logo.png"/>
@@ -39,7 +39,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 0.0.1
     </div>
-    <strong>Copyright &copy; 2022 <a href="https://adminlte.io">Nabi_Admin</a>.</strong>
+    <strong>Copyright &copy; 2022 <a href="/">{{ $settings['brand_name'] ?? 'Nabi' }}_Admin</a>.</strong>
   </footer>
 
 </div>

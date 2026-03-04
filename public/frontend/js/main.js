@@ -32,10 +32,15 @@ const handleBtnMenu = () => {
         navMobile.classList.remove('active-sub-mobile')
     }
 
-    navItem.forEach( (value,index) => {
-        value.onclick = (e) => {
-            showSubNavMobile.classList.toggle('active-sub-mobile')
-            e.target.classList.toggle('deg')
+    const toggles = $$('.nav-mobile-toggle')
+    toggles.forEach((toggle) => {
+        toggle.onclick = (e) => {
+            const parentItem = e.target.closest('.nav-mobile-item')
+            const submenu = parentItem.querySelector('.nav-mobile__child')
+            if (submenu) {
+                submenu.classList.toggle('active')
+                e.target.classList.toggle('deg')
+            }
         }
     })
     

@@ -26,11 +26,11 @@ class AddProductRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:products|max:255',
-            'quantity' => 'required|numeric|min:1',
-            'price' => 'required|numeric|min:1',
-            'sale_price' => 'nullable|lt:price|numeric',
-            'file' => 'required|mimes:jpg,jpeg,png',
-            'files' => 'required',
+            'quantity' => 'required|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
+            'sale_price' => 'nullable|numeric|lt:price',
+            'file' => 'required|mimes:jpg,jpeg,png,webp,svg,ico,gif,bmp,tiff',
+            'files' => 'nullable',
             
         ];
     }

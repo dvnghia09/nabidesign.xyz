@@ -25,17 +25,17 @@
                                             <div class="product-item__img" style="background-image:url({{ url('images') }}/{{$value->image}})"></div>
                                             <h4 class="product-item__name">{{$value->name}}</h4>
                                             <div class="product-item__price">
-                                                @if($value->sale_price > 0)
-                                                <span class="product-item__price-old">{{ number_format($value->price,0,".",".") }}đ</span>
-                                                <span class="product-item__price-present">{{ number_format($value->sale_price,0,".",".") }}đ</span>
+                                                @if(!$value->price)
+                                                    <span class="product-item__price-present" style="color: #ff4d4d; font-weight: bold;">Liên hệ: {{ $settings['phone'] ?? '0919295123' }}</span>
+                                                @elseif($value->sale_price > 0)
+                                                    <span class="product-item__price-old">{{ number_format($value->price,0,".",".") }}đ</span>
+                                                    <span class="product-item__price-present">{{ number_format($value->sale_price,0,".",".") }}đ</span>
                                                 @else
-                                                <span class="product-item__price-present">{{ number_format($value->price,0,".",".") }}đ</span>
+                                                    <span class="product-item__price-present">{{ number_format($value->price,0,".",".") }}đ</span>
                                                 @endif
                                             </div>
-                                            @if($value->sale_price > 0)
-                                            <span class="product-item__sale">Giảm {{ceil(100-(($value->sale_price/$value->price)*100))}}%</span>
-                                            @else
-                                            <span class="product-item__sale">Giảm 0%</span>
+                                            @if($value->sale_price > 0 && $value->price > 0)
+                                                <span class="product-item__sale">Giảm {{ceil(100-(($value->sale_price/$value->price)*100))}}%</span>
                                             @endif
                                         </a>
                                         <div class="product-item__btn">

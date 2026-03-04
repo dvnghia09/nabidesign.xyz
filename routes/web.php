@@ -70,6 +70,18 @@ Route::middleware('checkAdmin')->prefix('admin')->group(function(){
     // ---------------Danh sách đơn hàng-------------------
     Route::resource('order', OrderController::class);
 
+    // ---------------Liên hệ-----------------------------
+    Route::get('/contacts', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('admin.contact.index');
+    Route::get('/contacts/{id}', [App\Http\Controllers\Admin\ContactController::class, 'show'])->name('admin.contact.show');
+    Route::delete('/contacts/{id}', [App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('admin.contact.destroy');
+
+    // ---------------Chính sách bảo hành-----------------
+    Route::get('/warranty', [App\Http\Controllers\Admin\WarrantyController::class, 'edit'])->name('admin.warranty.edit');
+    Route::post('/warranty', [App\Http\Controllers\Admin\WarrantyController::class, 'update'])->name('admin.warranty.update');
+
+    // ---------------Cài đặt hệ thống--------------------
+    Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin.setting.index');
+    Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('admin.setting.update');
 
 });
 
@@ -79,6 +91,8 @@ Route::prefix('/')->group(function(){
     Route::get('/', [HomeController::class,'home'])->name('home');
     // Trang chi tiết sản phẩm
     Route::get('/product-detail/{id}', [HomeController::class,'product'])->name('product.detail');
+    // Lấy sản phẩm theo danh mục cha
+    Route::get('/product-parent-category/{id}', [HomeController::class,'productParentCate'])->name('product.parent-category');
     // Lấy sản phẩm theo danh mục
     Route::get('/product-category/{id}', [HomeController::class,'productCate'])->name('product.category');
     // Sản phẩm theo tìm kiếm
@@ -123,6 +137,11 @@ Route::prefix('/')->group(function(){
     Route::post('/register', [AccountController::class,'register'])->name('account.register');
     // Đăng nhập
     Route::post('/login', [AccountController::class,'login'])->name('account.login');
+
+    // ------------Liên hệ & Chính sách--------------------
+    Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+    Route::get('/warranty-policy', [App\Http\Controllers\WarrantyController::class, 'index'])->name('warranty.index');
 });
 
 

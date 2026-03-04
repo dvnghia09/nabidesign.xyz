@@ -77,7 +77,7 @@ class LookBookController extends Controller
         $lookBook = LookBook::find($id);
             if($request->hasFile('file')){
             File::delete('images/'.$lookBook->image); 
-            $imageName = time().'_'.$request->file('file')->getClientOriginalName();
+            $imageName = time().'_'.uniqid().'_'.$request->file('file')->getClientOriginalName();
             $request->file->move(public_path('images'),$imageName);
         } else {
             $imageName = $lookBook->image;

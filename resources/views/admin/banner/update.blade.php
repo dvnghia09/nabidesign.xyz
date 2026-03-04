@@ -22,7 +22,8 @@
                 @method('PUT')
               <div class="box-body">
                 <div class="form-group">
-                  <input type="hidden"  value="{{ $banner->name }}" name="name" class="form-control @error('name') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
+                  <label for="name">Tên Banner</label>
+                  <input type="text" value="{{ $banner->name }}" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Nhập tên banner">
                     @error('name')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror

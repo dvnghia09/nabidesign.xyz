@@ -21,77 +21,35 @@
                     </div>
                 @endif
       <!-- Default box -->
+      @foreach($attributes as $name => $values)
       <div class="col-md-6">
           <div class="box">
-            
-            <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody>
                     <tr>
-                      <th colspan="3">Bảng size</th>
+                      <th colspan="3" style="text-transform: uppercase; background: #f4f4f4;">Thuộc tính: {{ $name }}</th>
                     </tr>
                       
                     <tr>
                         <th>STT</th>
                         <th>Giá trị</th>
                         <th>Hành động</th>
-
                     </tr>
-                    @foreach($attrSize as $value)  
-               <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $value->value }}</td>
-                  <td>
-                  <a href="{{ route('attr-product.show',$value->id) }}" title="Xóa" onclick="return confirm('Bạn có muốn xóa thuộc tính này không ?')"><i class="fa fa-fw fa-trash" style="color:red" ></i></a>  
-                  </td>
-
-                </tr>
-                @endforeach 
-                
+                    @foreach($values as $value)  
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $value->value }}</td>
+                      <td>
+                        <a href="{{ route('attr-product.show',$value->id) }}" title="Xóa" onclick="return confirm('Bạn có muốn xóa thuộc tính này không ?')"><i class="fa fa-fw fa-trash" style="color:red" ></i></a>  
+                      </td>
+                    </tr>
+                    @endforeach 
               </tbody></table>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
-
-        <div class="col-md-6">
-          <div class="box">
-            
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tbody>
-                    <tr>
-                      <th colspan="3">Bảng màu</th>
-                    </tr>
-                    <tr>
-                        <th>STT</th>
-                        <th>Giá trị</th>
-                        <th>Hành động</th>
-                    </tr>
-                    @foreach($attrColor as $value)  
-               <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $value->value }}</td>
-                  <td>
-                  <a href="{{ route('attr-product.show',$value->id) }}" title="Xóa" class="" onclick="return confirm('Bạn có muốn xóa thuộc tính này không ?')"><i class="fa fa-fw fa-trash" style="color:red" ></i></a>  
-                  </td>
-
-                </tr>
-                @endforeach 
-                
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-      <!-- /.box -->
-
+        @endforeach
     </section>
-    <!-- /.content -->
 </div>
-
 @stop

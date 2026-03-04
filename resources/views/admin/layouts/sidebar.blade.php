@@ -2,15 +2,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{ url('assest') }}/images/avt1.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Tài Khoản Admin</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
+      
       <!-- search form -->
       <!-- <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -73,9 +65,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('attr-product.index')}}"><i class="fa fa-circle-o"></i>Danh sách</a></li>
-            <li><a href="{{ route('attr-product.create')}}"><i class="fa fa-circle-o"></i>Thêm mới màu</a></li>
-            <li><a href="{{ route('attr-product.edit', 1)}}"><i class="fa fa-circle-o"></i>Thêm mới size</a></li>
+            <li><a href="{{ route('attr-product.index')}}"><i class="fa fa-circle-o"></i>Danh sách & Thêm mới</a></li>
           </ul>
         </li>
 
@@ -91,6 +81,18 @@
           </a>
         </li>
 
+        <li class="">
+          <a href="{{ route('admin.contact.index') }}">
+            <i class="fa fa-envelope"></i> <span>Quản lý liên hệ</span>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="{{ route('admin.warranty.edit') }}">
+            <i class="fa fa-shield"></i> <span>Chính sách bảo hành</span>
+          </a>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-th fa-gear"></i> <span>Cài đặt</span>
@@ -99,8 +101,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ route('admin.setting.index') }}"><i class="fa fa-circle-o"></i>Cài đặt chung</a></li>
             <li><a href="{{ route('logout.admin') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
-            
           </ul>
         </li>
         

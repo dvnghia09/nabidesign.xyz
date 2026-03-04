@@ -24,20 +24,12 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {   
         $id = $this->request->get('id');
-        $price = $this->request->get('price');
-        if(is_numeric($price)){
-            $halfPrice = $price/4;
-        }else{
-            $halfPrice = 1;
-        }
-        
-
         
         return [
             'name' => 'required|max:255|unique:products,name,'.$id,
             'quantity' => 'required|numeric|min:0',
-            'price' => 'required|min:0|numeric',
-            'sale_price' => 'nullable|lt:price|numeric|gt:'.$halfPrice,
+            'price' => 'nullable|min:0|numeric',
+            'sale_price' => 'nullable|numeric|lt:price',
             'file' => 'mimes:jpg,jpeg,png',
         ];
     }

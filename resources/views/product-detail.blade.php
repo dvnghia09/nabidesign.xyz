@@ -71,42 +71,34 @@
           <h2 class = "product-title">{{ $product->name }}</h2>
 
           <div class = "product-price">
-            <p class = "last-price">Giá cũ: <span>{{ number_format($product->price,0,".",".") }} đ</span></p>
-            <p class = "new-price">Giá sale: <span>{{ number_format($product->sale_price,0,".",".") }} đ</span></p>
+            @if(!$product->price)
+              <p class = "new-price">Giá: <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="btn" style="text-align: center; display: inline-block; line-height: 45px;">
+              Liên hệ: {{ $settings['phone'] ?? '0919295123' }} <i class="fas fa-phone"></i>
+            </a></p>
+            @elseif($product->sale_price > 0)
+              <p class = "last-price">Giá cũ: <span>{{ number_format($product->price,0,".",".") }} đ</span></p>
+              <p class = "new-price">Giá sale: <span>{{ number_format($product->sale_price,0,".",".") }} đ</span></p>
+            @else
+              <p class = "new-price">Giá: <span>{{ number_format($product->price,0,".",".") }} đ</span></p>
+            @endif
           </div>
 
           
           <!-- Add sản phẩn vào giỏ hàng -->
-          <form method="POST" action="{{ route('add.cart') }}" class = "purchase-info">
+          <!-- <form method="POST" action="{{ route('add.cart') }}" class = "purchase-info"> -->
             @csrf
-            <div class="form-group">
-                <h2 class="title-method" >Màu sắc: </h2>
-                @foreach($color as $value)
-                  
-                    <label class="lable-color">
-                        <input class="dn"  type="radio" name="color" id="" value="{{ $value }}" >
-                        {{ $value }}
-                    </label>
-                  
+            @foreach($attributes as $name => $values)
+            <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                <h2 class="title-method" style="margin-top: 0">{{ $name }}: </h2>
+                @foreach($values as $val)
+                    <p style="font-size: 16px; margin-top: 0">
+                        {{ $val->value }}
+                    </p>
                 @endforeach
-                @error('color')
-                        <span class="message-err" style="color:red;font-size: 14px;display: block;">{{ $message }}</span>
-                @enderror
               </div>
-              <div class="form-group">
-              <h2 class="title-method" >Kích thước: </h2>
-                @foreach($size as $value)
-                  
-                    <label class="lable-size ">
-                        <input  class="dn"   type="radio" name="size" id="" value="{{ $value }}" >
-                        {{ $value }}
-                    </label>
-                  
-                @endforeach
-                @error('size')
-                        <span class="message-err" style="color:red;font-size: 14px;display: block;">{{ $message }}</span>
-                @enderror
-              </div>
+            @endforeach
+
+            @if($product->price)
             <input type="hidden" name="id" value="{{ $product->id }}">
             <label class="quantity-form" for="number">Số lượng:</label>
             <input id="number" type="number" min="1" name="quantity"  value = "1">
@@ -115,7 +107,9 @@
             <button type = "submit" class = "btn">
               Thêm vào giỏ hàng <i class = "fas fa-shopping-cart"></i>
             </button>
-          </form>
+            
+            @endif
+          <!-- </form> -->
           <div class = "product-detail">
             <h2>Mô tả về sản phẩm: </h2>
             {!! $product->description !!}
@@ -140,17 +134,17 @@
                                             <div class="product-item__img" style="background-image:url({{ url('images') }}/{{$value->image}})"></div>
                                             <h4 class="product-item__name">{{$value->name}}</h4>
                                             <div class="product-item__price">
-                                                @if($value->sale_price > 0)
-                                                <span class="product-item__price-old">{{ number_format($value->price,0,".",".") }}đ</span>
-                                                <span class="product-item__price-present">{{ number_format($value->sale_price,0,".",".") }}đ</span>
+                                                @if(!$value->price)
+                                                    <span class="product-item__price-present" style="color: #ff4d4d; font-weight: bold;">Liên hệ: {{ $settings['phone'] ?? '0919295123' }}</span>
+                                                @elseif($value->sale_price > 0)
+                                                    <span class="product-item__price-old">{{ number_format($value->price,0,".",".") }}đ</span>
+                                                    <span class="product-item__price-present">{{ number_format($value->sale_price,0,".",".") }}đ</span>
                                                 @else
-                                                <span class="product-item__price-present">{{ number_format($value->price,0,".",".") }}đ</span>
+                                                    <span class="product-item__price-present">{{ number_format($value->price,0,".",".") }}đ</span>
                                                 @endif
                                             </div>
-                                            @if($value->sale_price > 0)
-                                            <span class="product-item__sale">Giảm {{ceil(100-(($value->sale_price/$value->price)*100))}}%</span>
-                                            @else
-                                            <span class="product-item__sale">Giảm 0%</span>
+                                            @if($value->sale_price > 0 && $value->price > 0)
+                                                <span class="product-item__sale">Giảm {{ceil(100-(($value->sale_price/$value->price)*100))}}%</span>
                                             @endif
                                         </a>
                                         <div class="product-item__btn">
@@ -180,24 +174,13 @@
     <script>
       // khi chọn size và màu 
 
-    var sizes = document.querySelectorAll('.lable-size')
-    var colors = document.querySelectorAll('.lable-color')
+    var attrs = document.querySelectorAll('.lable-attr')
 
-
-
-    sizes.forEach(function(item,index){
+    attrs.forEach(function(item,index){
         item.onclick = function(){
-            if(document.querySelector('.lable-size.border-black')){
-                document.querySelector('.lable-size.border-black').classList.remove('border-black')
-            }
-            this.classList.add('border-black');
-        }
-    })
-
-    colors.forEach(function(item,index){
-        item.onclick = function(){
-            if(document.querySelector('.lable-color.border-black')){
-                document.querySelector('.lable-color.border-black').classList.remove('border-black')
+            let parent = this.parentElement;
+            if(parent.querySelector('.lable-attr.border-black')){
+                parent.querySelector('.lable-attr.border-black').classList.remove('border-black')
             }
             this.classList.add('border-black');
         }

@@ -55,6 +55,15 @@ class HomeController extends Controller
         return view('home', compact('product', 'category', 'totalQuantity', 'productSale', 'productTopSale', 'lookBook', 'slider', 'proHot'));
     }
 
+    public function productParentCate($id) {
+        $parentCate = Category::find($id);
+        $subCateIds = CategorySub::where('category_id', $id)->pluck('id')->toArray();
+        $product = Product::whereIn('category_id', $subCateIds)->get();
+        $nameCate = $parentCate; 
+        
+        return view('product-cate', compact('product', 'nameCate'));
+    }
+
     public function product($id) {
         $category = Category::all()->sortByDesc("id");
         $product = Product::find($id);
@@ -65,27 +74,10 @@ class HomeController extends Controller
 
         $catePro =  CategorySub::find($cate_id);
 
-        $attr = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
-        $attrColor = AttrProduct::where('name','color')->pluck('id')->toArray();
-        $attrSize = AttrProduct::where('name','size')->pluck('id')->toArray();
-
-        $colorArr = [];
-        foreach($attr as $key => $value){
-            if(in_array($value,$attrColor)){
-                $colorArr[$key] = $value;   
-            }
-        }
-        $color = AttrProduct::whereIn('id',$colorArr)->pluck('value')->toArray();
-
-        $sizeArr = [];
-        foreach($attr as $key => $value) {
-            if(in_array($value,$attrSize)) {
-                $sizeArr[$key] = $value;   
-            }
-        }
-        $size = AttrProduct::whereIn('id',$sizeArr)->pluck('value')->toArray();
+        $attrIds = ProductAttr::where('id_product', $id)->pluck('id_attr')->toArray();
+        $attributes = AttrProduct::whereIn('id', $attrIds)->get()->groupBy('name');
             
-        return view('product-detail',compact('category','product','images','color','size','productSame','catePro'));
+        return view('product-detail',compact('category','product','images','attributes','productSame','catePro'));
     }
 
     public function productCate($id) {

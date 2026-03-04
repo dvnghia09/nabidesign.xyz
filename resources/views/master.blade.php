@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="Thời trang Nabi" content="Thời trang nữ Nabi">
+    <title>{{ $settings['meta_title'] ?? ($settings['brand_name'] ?? 'Nabi Design') }}</title>
+    <meta name="description" content="{{ $settings['meta_description'] ?? ($settings['brand_name'] ?? 'Cung cấp sản phẩm chất lượng cao') }}">
+    <meta name="keywords" content="{{ $settings['meta_keywords'] ?? 'nabi, design, ecommerce' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="{{ url('frontend') }}/img/logo.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
@@ -16,7 +18,7 @@
     <link rel="stylesheet" href="{{ url('frontend') }}/font/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="{{ url('frontend') }}/font/fontawesome-free-5.15.3-web/fontawesome-free-5.15.3-web/css/all.css">
     
-    <title>Nabi design</title>
+
 </head>
 <body>
     
@@ -40,13 +42,33 @@
                             </h4>
                         </div>
                         <ul class="nav-mobile-list">
-                        @foreach($cateSub as $cate)
-                        <li class="nav-mobile-item ">
-                                <a href="{{ route('product.category',$cate->id) }}" class="nav-mobile-item__link">
-                                {{  $cate->name }}    
-                                </a>  
-                            </li>    
-                        @endforeach  
+                        @foreach($category as $value)
+                            <li class="nav-mobile-item">
+                                <div class="nav-mobile-item-wrapper">
+                                    <a href="{{ ($value->link && $value->link != '#') ? $value->link : route('product.parent-category', $value->id) }}" class="nav-mobile-item__link">
+                                        {{ $value->name }}
+                                    </a>
+                                    @if(count($value->categorySub) > 0)
+                                        <i class="ti-angle-down nav-mobile-toggle"></i>
+                                    @endif
+                                </div>
+                                @if(count($value->categorySub) > 0)
+                                    <ul class="nav-mobile__child">
+                                        @foreach($value->categorySub as $cate)
+                                            <li class="nav-mobile__child-item">
+                                                <a href="{{ route('product.category',$cate->id) }}" class="nav-mobile__child-item-link">{{$cate->name}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                        @endforeach
+                        <li class="nav-mobile-item">
+                            <a href="{{ route('warranty.index') }}" class="nav-mobile-item__link">CHÍNH SÁCH BẢO HÀNH</a>
+                        </li>
+                        <li class="nav-mobile-item">
+                            <a href="{{ route('contact.index') }}" class="nav-mobile-item__link">LIÊN HỆ</a>
+                        </li>
                         </ul>
                         <div class="nav-close">
                             <i class="ti-close nav-close-icon"></i>
@@ -62,7 +84,7 @@
 
                 <div class="header-logo">
                      <a class="header-logo__link" href="{{route('home')}}">
-                         <h2 class="header-logo__link-title">Nabi</h2>
+                         <h2 class="header-logo__link-title">{{ $settings['brand_name'] ?? 'Nabi' }}</h2>
                      </a>
                 </div>
                <div class="header-menu  hide-on-mobile-table">
@@ -70,7 +92,7 @@
                        
                         @foreach($category as $value)  
                         <li class="header-menu__item">
-                           <a href="{{ $value->link }}" class="header-menu__item-link">{{ $value->name }}</a>
+                           <a href="{{ ($value->link && $value->link != '#') ? $value->link : route('product.parent-category', $value->id) }}" class="header-menu__item-link">{{ $value->name }}</a>
                            <ul class="header-menu__child">
                                 @foreach($value->categorySub as $cate)
                                     <li class="header-menu__child-item">
@@ -82,6 +104,13 @@
                         </li>
 
                         @endforeach
+
+                        <li class="header-menu__item">
+                            <a href="{{ route('warranty.index') }}" class="header-menu__item-link">CHÍNH SÁCH BẢO HÀNH</a>
+                        </li>
+                        <li class="header-menu__item">
+                            <a href="{{ route('contact.index') }}" class="header-menu__item-link">LIÊN HỆ</a>
+                        </li>
 
                    </ul>
 
@@ -101,7 +130,7 @@
                     </div>
                     <div class="header-function">
                         
-                    <div class="header-function-sub">
+                    {{--<div class="header-function-sub">
                         <a href="{{ route('user') }}" class="header-user__link" title="Đăng nhập" ><i class="ti-user"></i></a>
                     </div>
                     <div class="header-function-sub">
@@ -109,7 +138,17 @@
                         @if($totalQuantity > 0)
                             <span class="noti_cart-quantity">{{ $totalQuantity }}</span>
                         @endif
-                    </div>
+                    </div>--}}
+                    <div class="header-call">
+    <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="call-btn shake">
+        <div class="call-btn-content">
+
+            <span class="call-icon">📞</span>
+            <span class="call-text">Gọi ngay</span>
+        </div>
+        <span class="call-number">{{ $settings['phone'] ?? '0919.295.123' }}</span>
+    </a>
+</div>
                     </div>
                </div>
             
@@ -126,8 +165,8 @@
                         <div class="contact-item">
                             <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/freeship.png" alt="">
-                                <h2 class="contact-item_content">MIỄN PHÍ GIAO HÀNG</h2>
-                            <p class="contact-item_content-sub">Với hóa đơn từ 300.000đ</p>
+                                <h2 class="contact-item_content">GIAO HÀNG TOÀN QUỐC</h2>
+                            <p class="contact-item_content-sub">Nhận hàng tại nhà trên toàn quốc</p>
                             </a>
                         </div>
                     </div>
@@ -135,17 +174,17 @@
                         <div class="contact-item">
                             <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/antoan.png" alt="">
-                                <h2 class="contact-item_content">03 NGÀY</h2>
-                            <p class="contact-item_content-sub">Đổi trả sản phẩm trong vòng 03 ngày</p>
+                                <h2 class="contact-item_content">ĐÓNG GÓI CẨN THẬN</h2>
+                            <p class="contact-item_content-sub">Đóng gói cẩn thận, đảm bảo an toàn cho sản phẩm</p>
                             </a>
                         </div>
                     </div>
                     <div class="col l-3 m-6 c-6 contact-item_padding">
                         <div class="contact-item">
-                            <a class="contact-item_link" href="tel:0919295123">
+                            <a class="contact-item_link" href="tel:{{ $settings['phone'] ?? '0919295123' }}">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/call.png" alt="">
                                 <h2 class="contact-item_content">MUA HÀNG (8h00-22h00, T2-CN)</h2>
-                            <p class="contact-item_content-sub">Mua hàng : 0919.295.123 /  CSKH : 056.467.0223</p>
+                            <p class="contact-item_content-sub">Mua hàng : {{ $settings['phone'] ?? '0919.295.123' }}</p>
                             </a>
                         </div>
                     </div>
@@ -153,8 +192,8 @@
                         <div class="contact-item">
                             <a class="contact-item_link" href="#">
                                 <img class="contact-item_img" src="{{ url('frontend') }}/img/thuhang.png" alt="">
-                                <h2 class="contact-item_content">THỬ NGAY TẠI SHOWROOMS</h2>
-                            <p class="contact-item_content-sub">showroom tại hà nội</p>
+                                <h2 class="contact-item_content">HỖ TRỢ 24/7</h2>
+                            <p class="contact-item_content-sub">Luôn sẵn sàng hỗ trợ bạn</p>
                             </a>
                         </div>
                     </div>
@@ -171,13 +210,13 @@
                            <h4 class="footer__content-heading">
                             CHÍNH SÁCH VÀ QUY ĐỊNH:
                            </h4>
-                           <a href="tel:0919295123" class="footer__content-title">Cách thức đặt hàng</a>
-                           <a href="tel:0919295123" class="footer__content-title">Chính sách thành viên</a>
-                           <a href="tel:0919295123" class="footer__content-title">Chính sách giao hàng</a>
-                           <a href="tel:0919295123" class="footer__content-title">Quy định đổi trả</a>
-                           <a href="tel:0919295123" class="footer__content-title">Hình thức thanh toán</a>
-                           <a href="tel:0919295123" class="footer__content-title">Chính sách bảo mật</a>
-                           <a href="tel:0919295123" class="footer__content-title">Chính sách xử lý khiêu nại</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Cách thức đặt hàng</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Chính sách thành viên</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Chính sách giao hàng</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Quy định đổi trả</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Hình thức thanh toán</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Chính sách bảo mật</a>
+                           <a href="tel:{{ $settings['phone'] ?? '0919295123' }}" class="footer__content-title">Chính sách xử lý khiêu nại</a>
                          </div>
                     </div>
                     <div class="col l-3 m-6 c-6 ">
@@ -185,11 +224,10 @@
                         <h4 class="footer__content-heading">
                          VỀ CHÚNG TÔI:
                         </h4>
-                        <p class="footer__content-title"><strong>Công ty TNHH NABI SHOP</strong></p>
-                        <p class="footer__content-title"><strong>Địa chỉ: </strong>Số 96 Di Ái, Xã Di Trạch, Quận Hoài Đức, Thành phố Hà Nội</p>
-                        <p class="footer__content-title"><strong>Mã số doanh nghiệp: </strong>0108901419 do Sở kế hoạch và đầu tư thành phố Hà Nội cấp ngày 17/09/2019</p>
-                        <p class="footer__content-title"><strong>Điện thoại: </strong>091.9295.123</p>
-                        <p class="footer__content-title"><strong>Email: </strong>nghiadv13@gmail.com</p>
+                        <p class="footer__content-title"><strong>{{ $settings['company_name'] ?? 'Công ty TNHH NABI SHOP' }}</strong></p>
+                        <p class="footer__content-title"><strong>Địa chỉ: </strong>{{ $settings['address'] ?? 'Số 96 Di Ái, Xã Di Trạch, Quận Hoài Đức, Thành phố Hà Nội' }}</p>
+                        <p class="footer__content-title"><strong>Điện thoại: </strong>{{ $settings['phone'] ?? '091.9295.123' }}</p>
+                        <p class="footer__content-title"><strong>Email: </strong>{{ $settings['email'] ?? 'nghiadv13@gmail.com' }}</p>
                         <a href="">
                             <img class="Verification" src="" alt="">
                         </a>      
@@ -258,7 +296,7 @@
    </div>
     <!-- Nhắn tin đến message -->
     <div class="btn-mess">
-        <a href="https://m.me/Nabidesign2020" class="link-mess">
+        <a href="{{ $settings['messenger_link'] ?? 'https://m.me/Nabidesign2020' }}" class="link-mess">
             <i class="fab fa-facebook-messenger"></i>
         </a>
     </div>

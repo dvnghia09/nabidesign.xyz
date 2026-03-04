@@ -1,83 +1,75 @@
+const slides = document.querySelectorAll('.slide-move__item');
+const slideUp = document.querySelector('.slide-up');
+const slideBack = document.querySelector('.slide-back');
+const slide = document.querySelector('.slide');
 
-const slides =$$('.slide-move__item')
-const slideUp = $('.slide-up')
-const slideBack = $('.slide-back')
-const widthSlide = $('.slide').clientWidth;
-const slideMove =  $('.slide-move')
-const maxSlide = widthSlide*2
+let current = 0;
+let timer;
 
-var up = 0
+const total = slides.length;
 
+// Show slide
+function showSlide(index, direction = 'next') {
 
-function Up (){
-    if(up < maxSlide) {
-        up += widthSlide
+    // Remove active cũ
+    slides[current].classList.remove('active');
+
+    // Set animation
+    if (direction === 'next') {
+        slides[index].style.animation = 'Slider 0.3s linear';
     } else {
-        up = 0
+        slides[index].style.animation = 'SliderTT 0.3s linear';
     }
 
-    slides.forEach((tab,index) => {
-        if(up === widthSlide) {
-            $('.slide-move__item.active').classList.remove('active')
-            slides[1].classList.add('active')
-        } if(up===maxSlide) {
-            $('.slide-move__item.active').classList.remove('active')
-            slides[2].classList.add('active')
+    // Add active mới
+    slides[index].classList.add('active');
 
-        } if(up===0) {
-            $('.slide-move__item.active').classList.remove('active')
-            slides[0].classList.add('active')
-        }
-    })
-
-    $('.slide-move__item.active').style.animation = `Slider linear 0.2s`
-    
+    current = index;
 }
 
-function Back (){
-    if(up > 0){
-        up -= widthSlide
+// Next
+function nextSlide() {
+    let next = current + 1;
 
-    }
-    else{
-        up = maxSlide
-    }
-    // slideMove.style.transform = `translate3d(-${up}px, 0px, 0px)`
-    slides.forEach((tab,index) => {
-        if(up === widthSlide) {
-            $('.slide-move__item.active').classList.remove('active')
-            slides[1].classList.add('active')
-        } if(up === maxSlide) {
-            $('.slide-move__item.active').classList.remove('active')
-            slides[2].classList.add('active')
+    if (next >= total) next = 0;
 
-        } if(up === 0) {
-            $('.slide-move__item.active').classList.remove('active')
-            slides[0].classList.add('active')
-        }
-    })
-    $('.slide-move__item.active').style.animation = `SliderTT linear 0.2s`
+    showSlide(next, 'next');
 }
 
-// Sau 5s chuyển slide
-let setTime;
-const startInterval = () => {
-    
-    setTime = setInterval(function(){
-        Up ()
-    },5000)
+// Prev
+function prevSlide() {
+    let prev = current - 1;
+
+    if (prev < 0) prev = total - 1;
+
+    showSlide(prev, 'back');
 }
 
-startInterval();
-
-slideUp.onclick = function(){
-    Up ()
-    clearInterval(setTime)
-    setTimeout(startInterval(), 5000)
+// Auto
+function start() {
+    timer = setInterval(nextSlide, 6000);
 }
 
-slideBack.onclick = function(){
-    Back ()
-    clearInterval(setTime)
-    setTimeout(startInterval(), 5000)
+function stop() {
+    clearInterval(timer);
 }
+
+// Click
+slideUp.onclick = () => {
+    nextSlide();
+    stop();
+    start();
+};
+
+slideBack.onclick = () => {
+    prevSlide();
+    stop();
+    start();
+};
+
+// Hover pause
+slide.addEventListener('mouseenter', stop);
+slide.addEventListener('mouseleave', start);
+
+// Start
+start();
