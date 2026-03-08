@@ -77,7 +77,7 @@
 
         <li class="">
           <a href="{{route('look-book.index')}}">
-            <i class="fa fa-th  fa-camera"></i> <span>Album Look Book</span>
+            <i class="fa fa-th  fa-camera"></i> <span>Thương Hiệu</span>
           </a>
         </li>
 
@@ -102,6 +102,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.setting.index') }}"><i class="fa fa-circle-o"></i>Cài đặt chung</a></li>
+            <li><a href="{{ route('admin.home-section.index') }}"><i class="fa fa-circle-o"></i>Cài đặt trang chủ</a></li>
             <li><a href="{{ route('logout.admin') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
           </ul>
         </li>

@@ -15,11 +15,30 @@
             <div class="row">
                 <div class="col l-6 m-12 c-12">
                     <h3 class="contact-info-title">Thông tin liên hệ</h3>
-                    <p class="contact-info-item"><strong>Địa chỉ:</strong> Số 96 Di Ái, Xã Di Trạch, Quận Hoài Đức, Thành phố Hà Nội</p>
-                    <p class="contact-info-item"><strong>Điện thoại:</strong> 091.9295.123</p>
-                    <p class="contact-info-item"><strong>Email:</strong> nghiadv13@gmail.com</p>
-                    <div class="contact-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.750117515277!2d106.26297961422215!3d20.310607717282842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313609986cd3c043%3A0x8d338f0dacb29a19!2zxJDhu5IgR-G7liBRVUFORyDEkOG7ik5I!5e0!3m2!1svi!2s!4v1630928162018!5m2!1svi!2s" width="100%" height="300" allowfullscreen="" loading="lazy"></iframe>
+                    <p class="contact-info-item"><strong>Địa chỉ:</strong> {{ $settings['address'] ?? 'Số 96 Di Ái, Xã Di Trạch, Quận Hoài Đức, Thành phố Hà Nội' }}</p>
+                    <p class="contact-info-item"><strong>Điện thoại:</strong>
+                        @php
+                            $phonesJsonC = $settings['phones'] ?? null;
+                            $phonesListC = $phonesJsonC ? json_decode($phonesJsonC, true) : [];
+                            if (empty($phonesListC) && !empty($settings['phone'])) {
+                                $phonesListC = [['number' => $settings['phone'], 'label' => '']];
+                            }
+                        @endphp
+                        @foreach($phonesListC as $phC)
+                            @if(!empty($phC['number']))
+                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $phC['number']) }}" style="display:inline-block; margin-right:10px; color:#e74c3c; font-weight:bold;">
+                                    @if(!empty($phC['label']))<span>{{ $phC['label'] }}: </span>@endif{{ $phC['number'] }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </p>
+                    <p class="contact-info-item"><strong>Email:</strong> {{ $settings['email'] ?? 'nghiadv13@gmail.com' }}</p>
+                    <div class="contact-map" style="margin-top: 20px; border-radius: 8px; overflow: hidden;">
+                        @if(!empty($settings['map_iframe']))
+                            {!! $settings['map_iframe'] !!}
+                        @else
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.750117515277!2d106.26297961422215!3d20.310607717282842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313609986cd3c043%3A0x8d338f0dacb29a19!2zxJDhu5IgR-G7liBRVUFORyDEkOG7ik5I!5e0!3m2!1svi!2s!4v1630928162018!5m2!1svi!2s" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        @endif
                     </div>
                 </div>
                 <div class="col l-6 m-12 c-12">

@@ -26,9 +26,16 @@
                 <input type="hidden" name="id" value="{{$product->id}}">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="example1">Tên sản phẩm</label>
-                  <input type="text" value="{{ old('name', $product->name) }}" name="name" class="form-control @error('name') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
+                  <label for="name">Tên sản phẩm</label>
+                  <input type="text" value="{{ old('name', $product->name) }}" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Nhập sản phẩm">
                     @error('name')
+                        <span class="message-err" style="color:red;">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="slug">Đường dẫn SEO (Slug)</label>
+                  <input type="text" value="{{ old('slug', $product->slug) }}" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" placeholder="duong-dan-seo">
+                    @error('slug')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
@@ -186,7 +193,7 @@ $("#files").on('change', function () {
  var image_holder = $('.image-preview');
  image_holder.empty();
 
- if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+ if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg" || extn == "webp" || extn == "svg" || extn == "ico" || extn == "bmp" || extn == "tiff") {
      if (typeof (FileReader) != "undefined") {
 
          //loop for each file selected for uploaded.
@@ -210,6 +217,28 @@ $("#files").on('change', function () {
  } else {
      alert("Pls select only images");
  }
+});
+
+$('#name').keyup(function(event) {
+    var title, slug;
+    title = $(this).val();
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    $('input#slug').val(slug);
 });
 </script>
 @stop

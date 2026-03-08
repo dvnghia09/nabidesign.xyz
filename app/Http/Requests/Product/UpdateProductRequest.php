@@ -27,10 +27,11 @@ class UpdateProductRequest extends FormRequest
         
         return [
             'name' => 'required|max:255|unique:products,name,'.$id,
+            'slug' => 'nullable|max:255|unique:products,slug,'.$id,
             'quantity' => 'required|numeric|min:0',
             'price' => 'nullable|min:0|numeric',
             'sale_price' => 'nullable|numeric|lt:price',
-            'file' => 'mimes:jpg,jpeg,png',
+            'file' => 'mimes:jpg,jpeg,png,webp,svg,ico,gif,bmp,tiff',
         ];
     }
 
@@ -38,6 +39,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'name.required'=> 'Tên không được để rỗng!',
             'name.unique' => 'Tên sản phẩm đã tồn tại !',
+            'slug.unique' => 'Đường dẫn SEO (Slug) này đã tồn tại, hãy thử tên khác !',
             'quantity.required' => 'Vui lòng nhập số lượng sản phẩm',
             'quantity.min' => 'Số lượng sản phẩm không được ít hơn 0',
             'file.mimes' => 'Định dạng hình ảnh không đúng',

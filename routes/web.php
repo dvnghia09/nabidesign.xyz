@@ -83,14 +83,22 @@ Route::middleware('checkAdmin')->prefix('admin')->group(function(){
     Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin.setting.index');
     Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('admin.setting.update');
 
+    // ---------------Cài đặt section trang chủ-----------
+    Route::get('/home-sections', [App\Http\Controllers\Admin\HomeSectionController::class, 'index'])->name('admin.home-section.index');
+    Route::post('/home-sections/store', [App\Http\Controllers\Admin\HomeSectionController::class, 'store'])->name('admin.home-section.store');
+    Route::post('/home-sections/update/{id}', [App\Http\Controllers\Admin\HomeSectionController::class, 'update'])->name('admin.home-section.update');
+    Route::get('/home-sections/delete/{id}', [App\Http\Controllers\Admin\HomeSectionController::class, 'destroy'])->name('admin.home-section.destroy');
+
 });
 
+// ---------------Sitemap.xml-----------------------------
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 
 Route::prefix('/')->group(function(){
 
     Route::get('/', [HomeController::class,'home'])->name('home');
     // Trang chi tiết sản phẩm
-    Route::get('/product-detail/{id}', [HomeController::class,'product'])->name('product.detail');
+    Route::get('/product-detail/{slug}', [HomeController::class,'product'])->name('product.detail');
     // Lấy sản phẩm theo danh mục cha
     Route::get('/product-parent-category/{id}', [HomeController::class,'productParentCate'])->name('product.parent-category');
     // Lấy sản phẩm theo danh mục

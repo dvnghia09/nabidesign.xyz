@@ -26,6 +26,7 @@ class AddProductRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:products|max:255',
+            'slug' => 'nullable|unique:products|max:255',
             'quantity' => 'required|numeric|min:0',
             'price' => 'nullable|numeric|min:0',
             'sale_price' => 'nullable|numeric|lt:price',
@@ -39,6 +40,7 @@ class AddProductRequest extends FormRequest
         return [
             'name.required'=> 'Tên không được để rỗng!',
             'name.unique' => 'Tên sản phẩm đã tồn tại !',
+            'slug.unique' => 'Đường dẫn SEO (Slug) này đã tồn tại, hãy thử tên khác !',
             'quantity.required' => 'Vui lòng nhập số lượng sản phẩm',
             'quantity.min' => 'Số lượng sản phẩm không được ít hơn 1',
             'file.mimes' => 'Định dạng hình ảnh không đúng',

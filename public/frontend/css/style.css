@@ -12,7 +12,7 @@
  }
 
 .app__container {
-    margin-top: var(--header-height);
+    /* margin-top: var(--header-height); */
 }
  
  .header:hover{
@@ -215,7 +215,34 @@
  .header-logo__link-title{
      margin: 0;
  }
- 
+
+ .header-logo__img {
+     height: 50px;
+     max-width: 180px;
+     width: auto;
+     object-fit: contain;
+     display: block;
+     transition: opacity 0.2s ease;
+ }
+
+ .header-logo__img:hover {
+     opacity: 0.85;
+ }
+
+ @media (max-width: 768px) {
+     .header-logo__img {
+         height: 38px;
+         max-width: 130px;
+     }
+ }
+
+ @media (max-width: 480px) {
+     .header-logo__img {
+         height: 32px;
+         max-width: 110px;
+     }
+ }
+
  .header-menu-list{
      padding: 0;
      display: flex;
@@ -562,7 +589,7 @@
      font-size: 1.4rem;
      font-weight: 700;
      color: var(--black-color);
-     margin-left: 16px;
+     /* margin-left: 16px; */
  }
  
  .product-item__sale{
@@ -1117,6 +1144,8 @@ font-size: 1.5rem;}
 
 .look-book-image {
     width: 100%;
+    height: 150px;
+    object-fit: cover;
     border-radius: 4px;
     vertical-align: middle;
 }
@@ -1477,4 +1506,230 @@ font-size: 1.5rem;}
 
 .nav-mobile__child.active {
     display: block !important;
+}
+
+/* ===== SOCIAL FLOATING BUTTONS (NEW) ===== */
+.social-float {
+    position: fixed;
+    bottom: 30px;
+    left: 20px; /* Chuyển sang trái để không bị đè với nút lên đầu trang */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+.social-float__item {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-float__item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.social-float__item--phone {
+    background-color: #28a745;
+}
+
+.social-float__item--phone i {
+    animation: phone-shake 1.5s infinite;
+}
+
+.social-float__item--fb {
+    background-color: #1877f2;
+}
+
+.social-float__item--mess {
+    background-color: #0084ff;
+}
+
+.social-float__item--zalo {
+    background-color: #0068ff;
+}
+
+.social-float__item--zalo svg {
+    fill: white;
+}
+
+.social-float__item i {
+    color: white;
+}
+
+.footer-social {
+    display: flex;
+    gap: 6px;
+}
+
+/* ===== BENEFITS BAR ===== */
+.benefits-bar {
+    width: 100%;
+    background: #fff;
+    border-top: 2px solid #1565c0;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    margin-top: var(--header-height);
+}
+
+.benefits-bar__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 16px;
+}
+
+.benefits-bar__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.benefits-bar__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: #ddd;
+}
+
+.benefits-bar__item:hover {
+    background: #f0f4ff;
+}
+
+.benefits-bar__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.benefits-bar__icon svg {
+    width: 34px;
+    height: 34px;
+    stroke: #1565c0;
+}
+
+.benefits-bar__text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .benefits-bar {
+        display: none;
+    }
+    .benefits-bar__inner {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 0;
+    }
+    .benefits-bar__item {
+        flex: 0 0 50%;
+        justify-content: flex-start;
+        padding: 10px 12px;
+        border-bottom: 1px solid #eee;
+    }
+    .benefits-bar__item:not(:last-child)::after {
+        display: none;
+    }
+    .benefits-bar__text {
+        font-size: 13px;
+    }
+    .benefits-bar__icon svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .benefits-bar {
+        display: none;
+    }
+    .benefits-bar__item {
+        flex: 0 0 100%;
+    }
+}
+
+
+/* ===== SOCIAL FLOAT PHONE PILL ===== */
+.sf-phone-pill {
+    /* Override base circle shape to pill */
+    width: auto !important;
+    height: 40px !important;
+    border-radius: 20px !important;
+    padding: 0 14px 0 4px !important;
+    gap: 0 !important;
+    justify-content: flex-start !important;
+    background-color: #e53935 !important;
+    box-shadow: 0 3px 8px rgba(229,57,53,0.45) !important;
+    overflow: hidden;
+    max-width: 44px;
+    transition: max-width 0.35s ease, padding 0.35s ease, box-shadow 0.3s ease !important;
+    white-space: nowrap;
+}
+
+.sf-phone-pill:hover {
+    max-width: 200px;
+    transform: none !important;
+    box-shadow: 0 4px 14px rgba(229,57,53,0.5) !important;
+}
+
+.sf-phone-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+.sf-phone-icon i {
+    color: #fff !important;
+    animation: phone-shake 1.5s infinite;
+    font-size: 15px !important;
+}
+
+.sf-phone-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    padding-left: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    max-width: 0;
+    transition: opacity 0.25s ease 0.1s, max-width 0.3s ease;
+}
+
+.sf-phone-pill:hover .sf-phone-label {
+    opacity: 1;
+    max-width: 150px;
 }

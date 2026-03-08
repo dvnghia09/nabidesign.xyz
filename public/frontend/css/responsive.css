@@ -3,6 +3,9 @@
     .hide-on-mobile-table{
         display: none;
     }
+    .app__container {
+        margin-top: 0;
+    }
 
     li {
         padding: 0;
@@ -19,9 +22,9 @@
         animation: none;
     }
 
-    .app__container {
+    /* .app__container {
         margin-top: var(--header-height-mobile-table);
-    }
+    } */
     
     .header-left{
         display: flex;
@@ -56,8 +59,14 @@
 
 /* Table */
 @media (min-width: 740px) and (max-width: 1023px) {
+    .benefits-bar {
+        margin-top: var(--header-height-mobile-table);
+    }
     .hide-on-table {
         display: none;
+    }
+    .app__container {
+        margin-top: 0;
     }
 
     .box-search{
@@ -225,6 +234,12 @@
         margin-right: 0;
         width: 100%;
     }
+    .header-right {
+        min-width: 84px;
+    }
+    .header-function {
+        margin-left: auto;
+    }
 }
 
 /* Overwrite previous mobile alignment attempts with a cleaner solution */
@@ -262,6 +277,10 @@
     .contact-info-title, 
     .contact-form-title {
         text-align: center !important;
+    }
+
+    .look-book-image {
+        height: 100px;
     }
 }
 
@@ -312,6 +331,12 @@
         padding: 20px 10px !important;
         font-size: 1.4rem !important;
         text-align: justify !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide, .warranty-container, .contact-container {
+        margin-top: var(--header-height-mobile-table) !important;
     }
 }
 

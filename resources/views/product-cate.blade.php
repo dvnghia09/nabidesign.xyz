@@ -20,7 +20,7 @@
                             @foreach($product as $value)
                                 <div class="col l-3 m-6 c-6 ">
                                     <div class="product">
-                                        <a href="{{ route('product.detail',$value->id) }}" class="product-item">
+                                        <a href="{{ route('product.detail', $value->slug ?? $value->id) }}" class="product-item">
                                             <div class="product-item__img" style="background-image:url({{ url('images') }}/{{$value->image}})"></div>
                                             <h4 class="product-item__name">{{$value->name}}</h4>
                                             <div class="product-item__price">

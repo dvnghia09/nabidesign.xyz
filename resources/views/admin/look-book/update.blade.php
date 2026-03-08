@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Sửa Look Book 
+        Sửa Thương Hiệu 
       </h1>
     </section>
 
@@ -22,14 +22,14 @@
                 @method('PUT')
               <div class="box-body">
                 <div class="form-group">
-                  <label for="example1">Tên Look Book</label>
+                  <label for="example1">Tên Thương Hiệu</label>
                   <input type="text" value="{{ $lookBook->name }}" name="name" class="form-control @error('name') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
                     @error('name')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                  <label for="example1">Đường dẫn look book</label>
+                  <label for="example1">Link (URL) thương hiệu</label>
                   <input type="text" value="{{ $lookBook->link }}" name="link" class="form-control @error('link') is-invalid @enderror" id="example1" placeholder="Nhập sản phẩm">
                     @error('link')
                         <span class="message-err" style="color:red;">{{ $message }}</span>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="file-upload">Ảnh Look Book</label>
+                  <label for="file-upload">Ảnh Thương Hiệu</label>
                   <div class="imageFile" style="height:120px;width:100%;">
                     <label for="file-upload" class="custom-file-upload">
                       <img src="{{url('images')}}/{{$lookBook->image}}" id="image" style="height:100%;border-radius:5px;" style="" alt="">

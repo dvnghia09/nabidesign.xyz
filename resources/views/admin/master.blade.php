@@ -7,7 +7,8 @@
   <title>{{ $settings['brand_name'] ?? 'Nabi' }} Admin</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="shortcut icon" type="image/png" href="{{ url('frontend') }}/img/logo.png"/>
+  <link rel="shortcut icon" type="image/png" href="{{ !empty($settings['favicon']) ? url('images/seo/' . $settings['favicon']) : url('frontend') . '/img/logo.png' }}"/>
+
   <link rel="stylesheet" href="{{ url('assest') }}/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url('assest') }}/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ url('assest') }}/css/AdminLTE.css">
@@ -39,7 +40,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 0.0.1
     </div>
-    <strong>Copyright &copy; 2022 <a href="/">{{ $settings['brand_name'] ?? 'Nabi' }}_Admin</a>.</strong>
+    <strong>Copyright &copy; 2026 <a href="/">{{ $settings['brand_name'] ?? 'Nabi' }}_Admin</a>.</strong>
   </footer>
 
 </div>

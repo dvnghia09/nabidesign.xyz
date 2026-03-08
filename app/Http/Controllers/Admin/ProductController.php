@@ -12,6 +12,7 @@ use App\Models\ProductAttr;
 use App\Http\Requests\Product\AddProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -35,6 +36,7 @@ class ProductController extends Controller
         }
         
         $data = $req->all();
+        $data['slug'] = $data['slug'] ? Str::slug($data['slug']) : Str::slug($data['name']);
         $data['image'] = $imageName ?? '';
         $data['price'] = $data['price'] ?? 0;
         $data['sale_price'] = $data['sale_price'] ?? 0;
@@ -176,6 +178,7 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $request->name,
+            'slug' => $request->slug ? Str::slug($request->slug) : Str::slug($request->name),
             'quantity' => $request->quantity,
             'price' => $request->price ?? 0,
             'sale_price' => $request->sale_price ?? 0,
