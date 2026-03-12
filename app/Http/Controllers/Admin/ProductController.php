@@ -146,7 +146,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         if($request->hasFile('file')) {
-            File::delete('images/'.$product->image); 
+            File::delete(public_path('images/'.$product->image)); 
             $imageName = time().'_'.uniqid().'_'.$request->file('file')->getClientOriginalName();
             $request->file->move(public_path('images'),$imageName);
         } else {
@@ -157,7 +157,7 @@ class ProductController extends Controller
         if ($request->hasFile('files')) {
             $imageOld = ImageProduct::where('product_id',$id)->get();
             foreach($imageOld as $value) {
-                File::delete('images/'.$value->images);
+                File::delete(public_path('images/'.$value->images));
             }
             $deleteImages = ImageProduct::where('product_id',$id)->delete();
             
@@ -194,11 +194,14 @@ class ProductController extends Controller
     public function delete($id){
         $imageOld = ImageProduct::where('product_id',$id)->get();
         foreach($imageOld as $value){
-            File::delete('images/'.$value->images);
+            File::delete(public_path('images/'.$value->images));
         }
         ImageProduct::where('product_id', $id)->delete();
         $product = Product::find($id);
-        $product->delete();
+        if ($product) {
+            File::delete(public_path('images/'.$product->image));
+            $product->delete();
+        }
 
         return redirect()->route('product.index')->with('message','Xóa thành công');
     }

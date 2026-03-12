@@ -66,7 +66,7 @@ class LookBookController extends Controller
     {
         $lookBook = LookBook::find($id);
         if ($request->hasFile('file')) {
-            File::delete('images/' . $lookBook->image);
+            File::delete(public_path('images/' . $lookBook->image));
             $imageName = time() . '_' . uniqid() . '_' . $request->file('file')->getClientOriginalName();
             $request->file->move(public_path('images'), $imageName);
         } else {
@@ -89,7 +89,7 @@ class LookBookController extends Controller
     {
         $lookBook = LookBook::find($id);
         if ($lookBook) {
-            File::delete('images/' . $lookBook->image);
+            File::delete(public_path('images/' . $lookBook->image));
             $lookBook->delete();
         }
         return redirect()->route('look-book.index')->with('message', 'Xóa thương hiệu thành công');

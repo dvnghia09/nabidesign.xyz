@@ -91,7 +91,7 @@ class BannerController extends Controller
         // Update  ảnh
         if($request->hasFile('file')){
         // Xóa ảnh cũ
-        File::delete('images/'.$lookBook->image); 
+        File::delete(public_path('images/'.$banner->image)); 
 
         $imageName = time().'_'.uniqid().'_'.$request->file('file')->getClientOriginalName();
         $request->file->move(public_path('images'),$imageName);
